@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
+import axios from 'axios';
 import Login from './components/Login';
 import NewUser from './components/NewUser';
 import Home from './components/Home';
@@ -10,6 +11,7 @@ import Calendar from './components/calendar.js'
 import './App.css';
 
 class App extends Component {
+
   render() {
     return (
       <BrowserRouter>

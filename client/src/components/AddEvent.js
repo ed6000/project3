@@ -5,7 +5,12 @@ export default class AddEvent extends Component {
   render() {
     return (
       <div>
-        This is the AddEvent route
+        <h1>This is the AddEvent route</h1>
+        <form>
+          <h2>This is the Add Event Form</h2>
+          <input type='submit' value='Submit' />
+        </form>
+
       </div>
       )
   }
