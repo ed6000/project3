@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
-import axios from 'axios';
 import Login from './components/Login';
 import NewUser from './components/NewUser';
 import Home from './components/Home';
@@ -16,7 +15,7 @@ class App extends Component {
       <BrowserRouter>
       <div className="App">
       <Switch>
-        <Route exact path='/' component={Login} />
+        <Route exact path='/' component={Home} />
         <Route path='/newuser' component={NewUser} />
         <Route path='/home' component={Calendar} />
         <Route path='/profile' component={Profile} />
