@@ -6,7 +6,7 @@ invites.allInvites = (req, res, next) => {
   db
     .manyOrNone('SELECT * FROM invites;')
     .then(data => {
-      res.locals.invite = data;
+      res.locals.invites = data;
       next();
     })
     .catch(error => {
