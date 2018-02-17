@@ -35,7 +35,7 @@ events.findById = (req, res, next) => {
 events.addEvent = (req, res, next) => {
   db
     .one(
-      'INSERT INTO events (user_id, event_time, event) VALUES ($1, $2, $3);',
+      'INSERT INTO events (user_id, event_time, event) VALUES ($1, $2, $3) RETURNING *;',
       [req.body.user_id, req.body.event_time, req.body.event]
     )
     .then(data => {
@@ -54,7 +54,7 @@ events.addEvent = (req, res, next) => {
 events.editEvent = (req, res, next) => {
   db
     .one(
-      'UPDATE events SET event_time = $1, event = $2 WHERE id = $3;',
+      'UPDATE events SET event_time = $1, event = $2 WHERE id = $3 RETURNING *;',
       [req.body.event_time, req.body.event, req.params.id]
     )
     .then(data => {
@@ -72,11 +72,11 @@ events.editEvent = (req, res, next) => {
 events.deleteEvent = (req, res, next) => {
   db
     .one(
-      'DELETE FROM events WHERE id = $1 RETURNING id;',
+      'DELETE FROM events WHERE id = $1',
       [req.params.id]
     )
-    .then(data => {
-      res.locals.event = data;
+    .then(() => {
+      console.log('event deleted');
       next();
     })
     .catch(err => {
@@ -86,7 +86,6 @@ events.deleteEvent = (req, res, next) => {
       );
     });
 };
-
 
 
 module.exports = events;

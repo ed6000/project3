@@ -40,7 +40,7 @@ const usersRouter = require('./controllers/users.js');
 const eventsRouter = require('./controllers/events.js');
 const invitesRouter = require('./controllers/invites.js');
 
-app.use('/user', usersRouter);
+app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 app.use('/invites', invitesRouter);
 

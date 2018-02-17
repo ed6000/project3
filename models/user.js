@@ -20,9 +20,10 @@ user.findById = (req, res, next) => {
 };
 
 user.addUser = (req, res, next) => {
+    console.log('in addUser model', req.body.username, req.body.password);
   db
     .one(
-      'INSERT INTO users (username, password_digest) VALUES ($1, $2);',
+      'INSERT INTO users (username, password_digest) VALUES ($1, $2) RETURNING *;',
       [req.body.username, req.body.password]
     )
     .then(data => {
@@ -41,7 +42,7 @@ user.addUser = (req, res, next) => {
 user.editUser = (req, res, next) => {
   db
     .one(
-      'UPDATE users SET username = $1, password_digest = $2 WHERE id = $3;',
+      'UPDATE users SET username = $1, password_digest = $2 WHERE id = $3 RETURNING *;',
       [req.body.username, req.body.password, req.params.id]
     )
     .then(data => {
@@ -58,12 +59,12 @@ user.editUser = (req, res, next) => {
 
 user.deleteUser = (req, res, next) => {
   db
-    .one(
-      'DELETE FROM users WHERE id = $1 RETURNING id;',
+    .none(
+      'DELETE FROM users WHERE id = $1;',
       [req.params.id]
     )
     .then(data => {
-      res.locals.user = data;
+      console.log('user deleted');
       next();
     })
     .catch(err => {

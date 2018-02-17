@@ -6,6 +6,7 @@ router.get('/:id', users.findById, (req, res) => {
 });
 
 router.post('/', users.addUser, (req, res) => {
+    console.log('in user post controller');
   res.json(res.locals.user);
 });
 
@@ -14,7 +15,7 @@ router.put('/:id', users.editUser, (req, res) => {
 });
 
 router.delete('/:id', users.deleteUser, (req, res) => {
-  res.json(res.locals.user);
+  res.send('user deleted');
 });
 
 module.exports = router;

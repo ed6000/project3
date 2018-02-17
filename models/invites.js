@@ -35,7 +35,7 @@ invites.findById = (req, res, next) => {
 invites.addInvite = (req, res, next) => {
   db
     .one(
-      'INSERT INTO invites (user_id_creator, user_id_invitee, event_id_creator, event_id, confirmation) VALUES ($1, $2, $3, $4, null);',
+      'INSERT INTO invites (user_id_creator, user_id_invitee, event_id_creator, event_id, confirmation) VALUES ($1, $2, $3, $4, null) RETURNING *;',
       [req.body.user_id_creator, req.body.user_id_invitee, req.body.event_id_creator, req.body.event_id]
     )
     .then(data => {
@@ -54,7 +54,7 @@ invites.addInvite = (req, res, next) => {
 invites.accept = (req, res, next) => {
   db
     .one(
-      'UPDATE invites SET confirmation = true WHERE id = $1;',
+      'UPDATE invites SET confirmation = true WHERE id = $1 RETURNING *;',
       [req.params.id]
     )
     .then(data => {
@@ -72,7 +72,7 @@ invites.accept = (req, res, next) => {
 invites.decline = (req, res, next) => {
   db
     .one(
-      'UPDATE invites SET confirmation = false WHERE id = $1;',
+      'UPDATE invites SET confirmation = false WHERE id = $1 RETURNING *;',
       [req.params.id]
     )
     .then(data => {
@@ -90,11 +90,11 @@ invites.decline = (req, res, next) => {
 invites.deleteInvite = (req, res, next) => {
   db
     .one(
-      'DELETE FROM invites WHERE id = $1 RETURNING id;',
+      'DELETE FROM invites WHERE id = $1',
       [req.params.id]
     )
-    .then(data => {
-      res.locals.invite = data;
+    .then(() => {
+      console.log('invite deleted');
       next();
     })
     .catch(err => {

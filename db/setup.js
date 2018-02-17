@@ -3,7 +3,7 @@ const pgp = require('pg-promise')();
 const cn = {
     host: 'localhost',
     port: 5432,
-    database: 'calendar_db'
+    database: 'planit_db'
 };
 
 const db = pgp(cn);

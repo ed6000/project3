@@ -22,7 +22,7 @@ router.put('/decline/:id', invites.decline, (req, res) => {
 });
 
 router.delete('/:id', invites.deleteInvite, (req, res) => {
-  res.json(res.locals.invite);
+  res.send('invite deleted');
 });
 
 module.exports = router;

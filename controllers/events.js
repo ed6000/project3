@@ -18,7 +18,7 @@ router.put('/:id', events.editEvent, (req, res) => {
 });
 
 router.delete('/:id', events.deleteEvent, (req, res) => {
-  res.json(res.locals.event);
+  res.send('event deleted');
 });
 
 module.exports = router;
