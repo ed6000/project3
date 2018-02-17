@@ -5,7 +5,9 @@ DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id BIGSERIAL PRIMARY KEY,
   username VARCHAR NOT NULL UNIQUE,
-  password_digest VARCHAR NOT NULL
+  password_digest VARCHAR NOT NULL,
+  profile_avatar VARCHAR,
+  hobbies VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS events CASCADE;
