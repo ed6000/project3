@@ -10,6 +10,32 @@ import Calendar from './components/calendar.js'
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    // Assuming we want to store the Books data as an array:
+    this.state = { Books: [] };
+
+    this.queryBooks = this.queryBooks.bind(this);
+    this.editCheese = this.editBook.bind(this);
+  }
+
+  queryBooks() {
+    axios({
+      url: "ttps://www.goodreads.com/search.xml?key=u7a25KasrUoQv8PVatUMg&q={searchTerm}",
+      method: "get"
+    }).then(response => {
+      console.log(
+        "In App.queryBooks, received response from server. response.data:",
+        response.data
+      );
+      this.setState({ Books: response.data });
+    });
+  }
+  componentDidMount() {
+    this.queryBooks();
+  }
+
   render() {
     return (
       <BrowserRouter>
