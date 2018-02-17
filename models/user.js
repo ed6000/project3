@@ -63,7 +63,7 @@ user.deleteUser = (req, res, next) => {
       'DELETE FROM users WHERE id = $1;',
       [req.params.id]
     )
-    .then(data => {
+    .then(() => {
       console.log('user deleted');
       next();
     })

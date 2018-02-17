@@ -6,7 +6,7 @@ import Home from './components/Home';
 import Profile from './components/Profile';
 import AddEvent from './components/AddEvent';
 import EditEvent from './components/EditEvent'; 
-// import logo from './logo.svg';
+import Calendar from './components/calendar.js'
 import './App.css';
 
 class App extends Component {
@@ -17,7 +17,7 @@ class App extends Component {
       <Switch>
         <Route exact path='/' component={Login} />
         <Route path='/newuser' component={NewUser} />
-        <Route path='/home' component={Home} />
+        <Route path='/home' component={Calendar} />
         <Route path='/profile' component={Profile} />
         <Route path='/addevent' component={AddEvent} />
         <Route path='/editevent' component={EditEvent} />
