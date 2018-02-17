@@ -1,49 +1,20 @@
-const user = require('../models/user.js');
+const users = require('../models/user.js');
 const router = require('express').Router();
-const passport = require('passport');
 
-const auth = require('../services/auth');
-
-router.get('/', (req, res, next) => {
-    res.redirect('/users/profile');
+router.get('/:id', users.findById, (req, res) => {
+  res.json(res.locals.user);
 });
 
-router.post(
-    '/',
-    passport.authenticate('local-signup', {
-        failureRedirect: '/users/new',
-        successRedirect: '/users/profile',
-    })
-);
-
-router.get('/new', (req, res) => {
-    res.render('users/new');
+router.post('/', users.addUser, (req, res) => {
+  res.json(res.locals.user);
 });
 
-router.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
+router.put('/:id', users.editUser, (req, res) => {
+  res.json(res.locals.user);
 });
 
-router.get('/login', (req, res) => {
-    res.render('users/login');
+router.delete('/:id', users.deleteUser, (req, res) => {
+  res.json(res.locals.user);
 });
-
-router.post(
-    '/login',
-    passport.authenticate('local-login', {
-        failureRedirect: '/users/login',
-        successRedirect: '/users/profile',
-    })
-);
-
-router.get(
-    '/profile',
-    auth.restrict,
-    user.findByEmailMiddleware,
-    (req, res) => {
-        res.render('users/profile', { user: res.locals.userData });
-    }
-);
 
 module.exports = router;

@@ -37,10 +37,13 @@ app.listen(port, () => {
 });
 
 const usersRouter = require('./controllers/users.js');
-const calendarsRouter = require('./controllers/calendars.js');
+const eventsRouter = require('./controllers/events.js');
+const invitesRouter = require('./controllers/invites.js');
 
-app.use('/calendars', calendarsRouter);
-app.use('/', usersRouter);
+app.use('/user', usersRouter);
+app.use('/events', eventsRouter);
+app.use('/invites', invitesRouter);
+
 
 app.use((err, req, res, next) => {
   console.log('Error encountered:', err);

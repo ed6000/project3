@@ -1,50 +1,78 @@
-const bcrypt = require('bcryptjs');
-
 const db = require('../db/setup.js');
 
 const user = {};
 
-user.create = function(user) {
-    const passwordDigest = bcrypt.hashSync(user.password, 10);
-    return db.oneOrNone(
-        'INSERT INTO users (username, password_digest) VALUES ($1, $2) RETURNING *;',
-        [user.username, passwordDigest]
-    );
+user.findById = (req, res, next) => {
+  const id = req.params.id;
+  db
+    .one(
+      'SELECT * FROM users WHERE id = ${id};',
+      { id: id }
+    )
+    .then(data => {
+      res.locals.user = data;
+      next();
+    })
+    .catch(error => {
+      console.log('error encountered in user.findById. Error:', error);
+      next(error);
+    });
 };
 
-user.findCalendar = function(id) {
-    return db.any(
-        'SELECT * FROM users JOIN calendars ON users.id = calendars.user_id WHERE users.id = $1;',
-        [id]
-    );
+user.addUser = (req, res, next) => {
+  db
+    .one(
+      'INSERT INTO users (username, password_digest) VALUES ($1, $2);',
+      [req.body.username, req.body.password]
+    )
+    .then(data => {
+      res.locals.user = data;
+      next();
+    })
+    .catch(err => {
+      console.log(
+        'Error encounted in user.addUser pgpromise call, error:',
+        err
+      );
+    });
 };
 
-user.findCalendarMiddleware = function(req, res, next) {
-    const id = req.user.id;
-    user
-        .findCalendar(id)
-        .then(data => {
-            res.locals.calendar = data;
-            next();
-        })
-        .catch(err => console.log('ERROR:', err));
+
+user.editUser = (req, res, next) => {
+  db
+    .one(
+      'UPDATE users SET username = $1, password_digest = $2 WHERE id = $3;',
+      [req.body.username, req.body.password, req.params.id]
+    )
+    .then(data => {
+      res.locals.user = data;
+      next();
+    })
+    .catch(err => {
+      console.log(
+        'Error encounted in user.editUser pgpromise call, error:',
+        err
+      );
+    });
 };
 
-user.findByUsername = function(username) {
-    return db.one('SELECT * FROM users WHERE username = $1;', [username]);
+user.deleteUser = (req, res, next) => {
+  db
+    .one(
+      'DELETE FROM users WHERE id = $1 RETURNING id;',
+      [req.params.id]
+    )
+    .then(data => {
+      res.locals.user = data;
+      next();
+    })
+    .catch(err => {
+      console.log(
+        'Error encounted in user.deleteUser pgpromise call, error:',
+        err
+      );
+    });
 };
-
-user.findByUsernameMiddleware = function(req, res, next) {
-    const username = req.user.username;
-    user
-        .findByUsername(username)
-        .then(result => {
-            res.locals.userData = result;
-            next();
-        })
-        .catch(err => console.log('ERROR:', err));
-};
-
 
 
 module.exports = user;
