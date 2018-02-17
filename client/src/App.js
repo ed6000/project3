@@ -18,6 +18,7 @@ class App extends Component {
         <Route exact path='/' component={Home} />
         <Route path='/newuser' component={NewUser} />
         <Route path='/home' component={Calendar} />
+        {/* ^^^ Maybe change this routename to make it less confusing with Home component */}
         <Route path='/profile' component={Profile} />
         <Route path='/addevent' component={AddEvent} />
         <Route path='/editevent' component={EditEvent} />
