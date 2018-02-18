@@ -26,3 +26,14 @@ export default class AddEvent extends Component {
       )
   }
 }
+
+// export default class AddEvent extends Component {
+
+//   render() {
+//     return (
+//       <div>
+//       This is the AddEvent Route
+//       </div>
+//       )
+//   }
+// }

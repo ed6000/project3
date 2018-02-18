@@ -8,7 +8,6 @@ const app = express();
 const port = process.env.PORT || 8080;
 const dotenv = require('dotenv').config();
 
-
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
@@ -44,7 +43,7 @@ const yelpRouter = require('./controllers/yelp.js');
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 app.use('/invites', invitesRouter);
-app.use('/yelp', yelpRouter);
+app.use('/addevent', yelpRouter);
 
 
 app.use((err, req, res, next) => {

@@ -20,9 +20,9 @@ class App extends Component {
     this.queryYelp = this.queryYelp.bind(this);
   }
 
-  queryYelp() {
+   queryYelp() {
     axios({
-    url: "http://localhost:8080/yelp/addevent",
+    url: "http://localhost:8080/addevent",
     method: "get"
   }).then(response => {
       console.log('In App.queryYelp, receieved response from server. response.data.businesses:', response.data
@@ -46,9 +46,7 @@ class App extends Component {
         <Route path='/home' component={Calendar} />
         <Route path='/profile' component={Profile} />
 
-        <Route 
-          exact 
-          path='/addevent' 
+        <Route path='/addevent' 
           render={props => { 
             return (
               <AddEvent

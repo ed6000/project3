@@ -12,8 +12,8 @@ Yelp.queryFiveRestaurants = (req, res, next) => {
   }
 })
   .then(response => {
-    response.locals.yelpData = response.data;
-    console.log(response.data);
+    res.locals.yelpData = response.data.businesses;
+    console.log(process.env.YELP_KEY);
     next();
   })
   .catch(error => {
