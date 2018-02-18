@@ -8,7 +8,6 @@ const app = express();
 const port = process.env.PORT || 8080;
 const dotenv = require('dotenv').config();
 
-
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
@@ -45,6 +44,10 @@ app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 app.use('/invites', invitesRouter);
 app.use('/addevent', yelpRouter);
+<<<<<<< HEAD
+=======
+
+>>>>>>> bfb7a862837922c57862f733da2cd1e3ba201b74
 
 app.use((err, req, res, next) => {
   console.log('Error encountered:', err);
