@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 export default class AddEvent extends Component {
 
   render() {
-    return (
+    return  (
       <div>
-        This is the AddEvent route
+      <h1>AddEvent Route</h1>
       </div>
       )
   }
