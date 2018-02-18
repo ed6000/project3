@@ -39,10 +39,12 @@ app.listen(port, () => {
 const usersRouter = require('./controllers/users.js');
 const eventsRouter = require('./controllers/events.js');
 const invitesRouter = require('./controllers/invites.js');
+const yelpRouter = require('./controllers/yelp.js');
 
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 app.use('/invites', invitesRouter);
+app.use('/yelp', yelpRouter);
 
 
 app.use((err, req, res, next) => {
