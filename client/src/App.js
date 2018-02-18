@@ -11,6 +11,30 @@ import Calendar from './components/calendar.js'
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      yelpData: []
+    };
+    this.queryYelp = this.queryYelp.bind(this);
+  }
+
+  queryYelp() {
+    axios({
+    url: "http://localhost:8080/yelp/addevent",
+    method: "get"
+  }).then(response => {
+      console.log('In App.queryYelp, receieved response from server. response.data.businesses:', response.data
+      );
+      this.setState({ yelpData: response.data });
+    });
+  }
+
+  componentDidMount() {
+    this.queryYelp();
+  }
+
 
   render() {
     return (
@@ -21,13 +45,28 @@ class App extends Component {
         <Route path='/newuser' component={NewUser} />
         <Route path='/home' component={Calendar} />
         <Route path='/profile' component={Profile} />
-        <Route path='/addevent' component={AddEvent} />
+
+        <Route 
+          exact 
+          path='/addevent' 
+          render={props => { 
+            return (
+              <AddEvent
+                {...props}
+                yelpData={this.state.yelpData}
+                queryYelp={this.queryYelp}
+                />
+              );
+            }} 
+          />
+
         <Route path='/editevent' component={EditEvent} />
       </Switch>
       </div>
       </BrowserRouter>
     );
   }
+  // <Route path='/addevent' component={AddEvent} />
 }
 
 export default App;
