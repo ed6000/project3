@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 
 export default class AddEvent extends Component {
+  constructor(props) {
+    super(props); 
+      this.state = {
+        yelpData: props.queryYelp
+      }
+    }
 
   render() {
-    return (
+    return  (
       <div>
-        <h1>This is the AddEvent route</h1>
-        <form>
-          <h2>This is the Add Event Form</h2>
-          <input type='submit' value='Submit' />
-        </form>
+      <h1>AddEvent Route</h1>
+        {this.props.yelpData.map(el => {
+          console.log("THESE ARE THE MAPPED YELP RESTAURANTS", el);
+          return (
+            <div key={el.id}>
+              <p>Name:{el.name}</p>
+              <p>Address:{el.display_address}</p>
+            </div>
+          );
+        })}
 
       </div>
       )
