@@ -19,7 +19,7 @@ constructor(props) {
     return  (
       <div>
 <<<<<<< HEAD
-        {this.props.cheeses.map(el => {
+        {this.props.books.map(el => {
           console.log("THESE ARE THE MAPPED BOOKS", el);
           return (
             <div key={el.id}>

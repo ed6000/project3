@@ -20,12 +20,12 @@ class App extends Component {
     this.state = { Books: [] };
 
     this.queryBooks = this.queryBooks.bind(this);
-    this.editCheese = this.editBook.bind(this);
+    this.editBooks = this.editBook.bind(this);
   }
 
   queryBooks() {
     axios({
-      url: "ttps://www.goodreads.com/search.xml?key=u7a25KasrUoQv8PVatUMg&q={searchTerm}",
+      url: `https://www.goodreads.com/search.xml?key=${process.env.GR_KEY}&q={searchTerm}`,
       method: "get"
     }).then(response => {
       console.log(
@@ -37,6 +37,9 @@ class App extends Component {
   }
   componentDidMount() {
     this.queryBooks();
+  }
+  componentWillUnmount() {
+    this.queryBooks.abort();
   }
 
 =======
