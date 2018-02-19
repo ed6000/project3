@@ -24,7 +24,7 @@ export default class Home extends Component {
     }
 
   handleChange(event) {
-    this.setState({username: event.target.value, password: event.target.value});
+    this.setState({username: event.target.username, password: event.target.password});
   }
 
   handleSubmit(event) {
@@ -34,7 +34,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div className='homepage'>
+      <div>
         <header>
           <h1>Welcome to PlanIt!</h1>
         </header>

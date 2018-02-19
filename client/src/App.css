@@ -12,6 +12,16 @@
   grid-template-columns: 1fr 4fr 1fr;
 }
 
+.register-text {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 4fr 1fr;
+}
+
 .homepage-text > p {
+  grid-column: 2 / span 1;
+}
+
+.register-text > p {
   grid-column: 2 / span 1;
 }
