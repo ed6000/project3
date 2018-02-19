@@ -28,7 +28,7 @@ export default class Home extends Component {
   }
 
   handleSubmit(event) {
-    alert(`The username: ${this.state.value} was submitted.`);
+    alert(`The username: ${this.state.username} was submitted.`);
     event.preventDefault();
   }
 
@@ -38,11 +38,11 @@ export default class Home extends Component {
         <header>
           <h1>Welcome to PlanIt!</h1>
         </header>
-        <h3>Log in here:</h3>
+        <h3>Login here:</h3>
 
         <form onSubmit={this.handleSubmit}>
           <label>
-            Username: <input type='text' value={this.state.value} placeholder='Enter username' onChange={this.handleChange} /> <br></br>
+            Username: <input type='text' value={this.state.username} placeholder='Enter username' onChange={this.handleChange} /> <br></br>
             Password: <input type='text' value={this.state.password} placeholder='Enter password' onChange={this.handleChange} /><br></br>
           </label>
           <input type="submit" value="Submit" />

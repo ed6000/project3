@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Login from './components/Login';
 import NewUser from './components/NewUser';
 import Home from './components/Home';
 import Profile from './components/Profile';
@@ -47,8 +46,8 @@ class App extends Component {
         <Route path='/calendar' component={Calendar} />
         <Route path='/profile' component={Profile} />
 
-        <Route path='/addevent' 
-          render={props => { 
+        <Route path='/addevent'
+          render={props => {
             return (
               <AddEvent
                 {...props}
@@ -56,7 +55,7 @@ class App extends Component {
                 queryYelp={this.queryYelp}
                 />
               );
-            }} 
+            }}
           />
 
         <Route path='/editevent' component={EditEvent} />
