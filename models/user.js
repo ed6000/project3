@@ -23,8 +23,8 @@ user.addUser = (req, res, next) => {
     console.log('in addUser model', req.body.username, req.body.password);
   db
     .one(
-      'INSERT INTO users (username, password_digest) VALUES ($1, $2) RETURNING *;',
-      [req.body.username, req.body.password]
+      'INSERT INTO users (username, password_digest, profile_avatar, hobbies) VALUES ($1, $2, $3, $4) RETURNING *;',
+      [req.body.username, req.body.password, null, null]
     )
     .then(data => {
       res.locals.user = data;
