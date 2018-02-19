@@ -48,8 +48,17 @@ class App extends Component {
         {/* ^^^ Maybe change this routename to make it less confusing with Home component */}
         <Route path='/profile' component={Profile} />
 
-        <Route path='/addevent' component={AddEvent} />
-
+          // <Route path='/addevent' 
+          render={props => { 
+            return (
+              <AddEvent
+                {...props}
+                yelpData={this.state.yelpData}
+                queryYelp={this.queryYelp}
+                />
+              );
+            }} 
+          />
 
         <Route path='/editevent' component={EditEvent} />
       </Switch>
