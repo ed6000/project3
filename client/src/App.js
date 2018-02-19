@@ -10,6 +10,7 @@ import EditEvent from './components/EditEvent';
 import Calendar from './components/calendar.js'
 import './App.css';
 
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +45,6 @@ class App extends Component {
         <Route exact path='/' component={Home} />
         <Route path='/newuser' component={NewUser} />
         <Route path='/calendar' component={Calendar} />
-        {/* ^^^ Maybe change this routename to make it less confusing with Home component */}
         <Route path='/profile' component={Profile} />
 
         <Route path='/addevent' 
@@ -65,7 +65,6 @@ class App extends Component {
       </BrowserRouter>
     );
   }
-  // <Route path='/addevent' component={AddEvent} />
 }
 
 export default App;
