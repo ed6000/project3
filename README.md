@@ -1,4 +1,4 @@
-# Project 2: PlanIt!
+# Project 3: PlanIt!
 
 ## Introduction
 
