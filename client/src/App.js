@@ -8,7 +8,6 @@ import Profile from './components/Profile';
 import AddEvent from './components/AddEvent';
 import EditEvent from './components/EditEvent';
 import Calendar from './components/calendar.js'
-import axios from 'axios'
 import './App.css';
 
 class App extends Component {

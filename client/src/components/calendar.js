@@ -14,11 +14,17 @@ export default class Calendar extends Component {
   }
 
   handleSelect(slotInfo) {
-    slotInfo.event = 'movies';
-    console.log('selected, info: ', slotInfo);
+    Events.push({
+      title: 'create an app',
+      start: slotInfo.start,
+      end: slotInfo.end,
+    });
+    console.log('events: ', Events);
   }
 
   render() {
+    const events = {Events};
+    console.log('events: ', events);
     const MyCalendar = props => (
       <div className="calendar-container">
         <BigCalendar
