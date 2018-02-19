@@ -16,9 +16,12 @@ class App extends Component {
     super(props);
 
     this.state = {
-      yelpData: []
+      yelpData: [],
+      usersData: []
     };
     this.queryYelp = this.queryYelp.bind(this);
+    this.queryUsers = this.queryUsers.bind(this);
+
   }
 
    queryYelp() {
@@ -32,9 +35,24 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
-    this.queryYelp();
+  queryUsers() {
+    axios({
+      url: "http://localhost:8080/users",
+      method: "get"
+    }).then(response => {
+      console.log(
+        "In App.queryUsers, received response from server. response.data:",
+        response.data
+      );
+      this.setState({ usersData: response.data });
+    });
   }
+
+  componentDidMount() {
+    this.queryYelp()
+    this.queryUsers()
+  }
+
 
 
   render() {
@@ -43,11 +61,21 @@ class App extends Component {
       <div className="App">
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route path='/newuser' component={NewUser} />
-        <Route path='/calendar' component={Calendar} />
-        <Route path='/profile' component={Profile} />
+        <Route exact path='/newuser' component={NewUser} />
+        <Route exact path='/calendar' component={Calendar} />
+        <Route exact path='/profile'
+        render={props => {
+          return (
+            <Profile
+            {...props}
+            usersData={this.state.usersData}
+            queryUsers={this.queryUsers}
+            />
+            );
+        }}
+        />
 
-        <Route path='/addevent' 
+        <Route exact path='/addevent' 
           render={props => { 
             return (
               <AddEvent
@@ -59,7 +87,7 @@ class App extends Component {
             }} 
           />
 
-        <Route path='/editevent' component={EditEvent} />
+        <Route exact path='/editevent' component={EditEvent} />
       </Switch>
       </div>
       </BrowserRouter>
