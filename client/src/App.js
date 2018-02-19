@@ -20,7 +20,7 @@ class App extends Component {
       usersData: []
     };
     this.queryYelp = this.queryYelp.bind(this);
-    this.queryUsers = this.queryUsers.bind(this);
+    this.queryUser = this.queryUser.bind(this);
 
   }
 
@@ -35,9 +35,9 @@ class App extends Component {
     });
   }
 
-  queryUsers() {
+  queryUser() {
     axios({
-      url: "http://localhost:8080/users",
+      url: "http://localhost:8080/users/2",
       method: "get"
     }).then(response => {
       console.log(
@@ -50,7 +50,7 @@ class App extends Component {
 
   componentDidMount() {
     this.queryYelp()
-    this.queryUsers()
+    this.queryUser()
   }
 
 
@@ -69,7 +69,7 @@ class App extends Component {
             <Profile
             {...props}
             usersData={this.state.usersData}
-            queryUsers={this.queryUsers}
+            queryUser={this.queryUser}
             />
             );
         }}

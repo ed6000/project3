@@ -5,6 +5,10 @@ router.get('/:id', users.findById, (req, res) => {
   res.json(res.locals.user);
 });
 
+router.get('/', users.allUsers, (req, res) => {
+  res.json(res.locals.user);
+});
+
 router.post('/', users.addUser, (req, res) => {
     console.log('in user post controller');
   res.json(res.locals.user);

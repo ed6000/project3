@@ -2,6 +2,28 @@ const db = require('../db/setup.js');
 
 const user = {};
 
+
+
+user.allUsers = (req, res, next) => {
+  const id = req.params.id;
+  db
+    .manyOrNone('SELECT * FROM users;')
+    .then(data => {
+      res.locals.user = data;
+      next();
+    })
+    .catch(error => {
+      console.log('error encountered in user.allUsers. Error:', error);
+      next(error);
+    });
+};
+
+
+
+
+
+
+
 user.findById = (req, res, next) => {
   const id = req.params.id;
   db
