@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
@@ -17,24 +16,30 @@ class App extends Component {
     super(props);
     this.state = {
       yelpData: [],
-      usersData: []
+      usersData: [],
+      zip: '10001'
     };
 
     this.queryYelp = this.queryYelp.bind(this);
-    this.queryUser = this.queryUser.bind(this);
-  
+    this.queryUser = this.queryUser.bind(this)
   }
 
-  queryYelp() {
+  componentDidMount() {
+    this.queryYelp(this.state);
+    this.queryUser();
+  }
+
+  queryYelp(data) {
+    console.log('data: ', data);
     axios({
-      url: "http://localhost:8080/addevent",
-      method: "get"
-    }).then(response => {
-      console.log(
-        "In App.queryYelp, receieved response from server. response.data.businesses:",
-        response.data
-      );
+    url: "http://localhost:8080/addevent",
+    method: "post", 
+    data: {
+      zip: data.zip
+    }
+  }).then(response => {
       this.setState({ yelpData: response.data });
+      console.log('app.state: ', this.state);
     });
   }
 
