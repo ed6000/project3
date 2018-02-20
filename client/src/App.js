@@ -19,7 +19,7 @@ class App extends Component {
       zip: 10001, 
       events: [],
       dataLoaded: false,
-      book: ['pinnochio', 'ulysees'],
+      book: [],
       slot: {},
       event: {},
     };
@@ -35,6 +35,7 @@ class App extends Component {
     this.selectEvent = this.selectEvent.bind(this);
     this.editEvent = this.editEvent.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
+    this.queryBooks = this.queryBooks.bind(this);
   }
 
   toggleData() {
@@ -66,13 +67,11 @@ class App extends Component {
   }
 
   queryBooks(data) {
-    console.log('data: ', data);
+    console.log('in queryBooks, data: ', data);
     axios({
-    url: "http://localhost:8080/addevent",
+    url: "http://localhost:8080/addbook",
     method: "post", 
-    data: {
-      book: data.book
-    }
+    data
   }).then(response => {
       this.setState({ book: response.data });
       console.log('app.state: ', this.state);

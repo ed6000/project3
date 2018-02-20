@@ -11,7 +11,8 @@ export default class AddEvent extends Component {
         title: "",
         start: this.props.slot.start,
         end_time: this.props.slot.end,
-        bookData: "ulysses"
+        keyword: "",
+        book: this.props.book
       }
       this.changeHandler = this.changeHandler.bind(this);
       this.submitHandler = this.submitHandler.bind(this);
@@ -46,6 +47,7 @@ export default class AddEvent extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+    console.log('in changeHandler, state is ', this.state);
   }
 
   submitHandler(e) {
@@ -54,8 +56,8 @@ export default class AddEvent extends Component {
     console.log('state: ', this.state);
     this.props.queryYelp(data);
     this.resetState();
-    const books = {books: this.state.bookData};
-    this.props.queryBooks(data);
+    const bookData = {keyword: this.state.keyword};
+    this.props.queryBooks(bookData);
   }
 
   showRestaurant(e) {
@@ -128,12 +130,12 @@ export default class AddEvent extends Component {
         </div>
       )
     } else if (this.state.showBooks === true) {
-      const bookObj = this.props.book.map((el, index) => {
+      const bookObj = this.state.book.map((el, index) => {
             console.log("THESE ARE THE MAPPED BOOKS", el);
             return (
               <div key={index}>
-                <p>Book Title: {el}</p>
-                <p>Author: unknown</p>
+                <p>Book Title: {el.volumeInfo.title}</p>
+                <p>Author: {el.volumeInfo.authors}</p>
                </div>
             );
           })
@@ -170,13 +172,21 @@ export default class AddEvent extends Component {
         <label>
           <input 
             type='text' 
-            name='bookData' 
+            name='keyword' 
             onChange={this.changeHandler}
             placeholder='Search for book' />
         </label>
         <button type='submit'>Search</button>
         </form>
-          <div>{bookObj}</div>
+          <div>{this.props.book.map((el, index) => {
+            console.log("THESE ARE THE MAPPED BOOKS", el);
+            return (
+              <div key={index}>
+                <p>Book Title: {el.volumeInfo.title}</p>
+                <p>Author: {el.volumeInfo.authors}</p>
+               </div>
+            );
+          })}</div>
         </div>
       )
     } return (

@@ -2,14 +2,15 @@ const axios = require('axios');
 const Gbooks = {};
 
 Gbooks.queryBooks = (req, res, next) => {
-  book = req.body.book;
+  const keyword = req.body.keyword;
+  console.log('in gbooks.queryBooks, keyword is ', keyword);
   axios({
   method: "get",
-  url: `https://www.googleapis.com/books/v1/volumes?q=${book}`,
+  url: `https://www.googleapis.com/books/v1/volumes?q=${keyword}`,
 })
   .then(response => {
-    res.locals.Gbooks = response.data.items;
-    console.log('response: ', response.data.Gbooks);
+    res.locals.gbooks = response.data.items;
+    console.log('response: ', response.data.items);
     next();
   })
   .catch(error => {

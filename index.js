@@ -39,11 +39,13 @@ const usersRouter = require('./controllers/users.js');
 const eventsRouter = require('./controllers/events.js');
 const invitesRouter = require('./controllers/invites.js');
 const yelpRouter = require('./controllers/yelp.js');
+const bookRouter = require('./controllers/gbooks.js');
 
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 app.use('/invites', invitesRouter);
 app.use('/addevent', yelpRouter);
+app.use('/addbook', bookRouter);
 
 app.use((err, req, res, next) => {
   console.log('Error encountered:', err);
