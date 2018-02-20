@@ -35,8 +35,8 @@ events.findById = (req, res, next) => {
 events.addEvent = (req, res, next) => {
   db
     .one(
-      'INSERT INTO events (user_id, event_time, event) VALUES ($1, $2, $3) RETURNING *;',
-      [req.body.user_id, req.body.event_time, req.body.event]
+      'INSERT INTO events (user_id, title, start, end_time) VALUES ($1, $2, $3, $4) RETURNING *;',
+      [1, req.body.title, req.body.start, req.body.end_time]
     )
     .then(data => {
       res.locals.event = data;
@@ -54,8 +54,8 @@ events.addEvent = (req, res, next) => {
 events.editEvent = (req, res, next) => {
   db
     .one(
-      'UPDATE events SET event_time = $1, event = $2 WHERE id = $3 RETURNING *;',
-      [req.body.event_time, req.body.event, req.params.id]
+      'UPDATE events SET title = $1, start = $2, end_time = $3 WHERE id = $4 RETURNING *;',
+      [req.body.title, req.body.start, req.body.end_time, req.params.id]
     )
     .then(data => {
       res.locals.event = data;

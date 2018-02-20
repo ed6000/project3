@@ -19,6 +19,8 @@ class App extends Component {
       zip: 10001, 
       events: [],
       dataLoaded: false,
+      slot: {},
+      event: {},
     };
 
     console.log(this.state)
@@ -27,6 +29,11 @@ class App extends Component {
     this.queryUser = this.queryUser.bind(this);
     this.queryEvents = this.queryEvents.bind(this);
     this.toggleData = this.toggleData.bind(this);
+    this.selectSlot = this.selectSlot.bind(this);
+    this.addEvent = this.addEvent.bind(this);
+    this.selectEvent = this.selectEvent.bind(this);
+    this.editEvent = this.editEvent.bind(this);
+    this.deleteEvent = this.deleteEvent.bind(this);
   }
 
   toggleData() {
@@ -67,6 +74,66 @@ class App extends Component {
     });
   }
 
+  selectSlot(slotInfo) {
+    this.setState({ slot: slotInfo});
+    console.log('in selectSlot, slot is ', this.state.slot);
+  }
+
+  addEvent(data) {
+    this.setState({ dataLoaded: false });
+    console.log('in app.addEvent, data is ', data);
+    axios({
+    url: "http://localhost:8080/events",
+    method: "post",
+    data 
+  }).then(response => {
+      this.setState(prevState => {
+        console.log('response is ', response.data);
+        prevState.events = prevState.events.concat(response.data);
+        return prevState;
+      });
+      console.log('in addEvent, events: ', this.state.events);
+    });
+  }
+
+  selectEvent(event) {
+    this.setState({ event: event});
+    console.log('in selectEvent, event ', event);
+  }
+
+  editEvent(data) {
+    this.setState({ dataLoaded: false });
+    console.log('in app.editEvent, data is ', data);
+    axios({
+    url: `http://localhost:8080/events/${data.id}`,
+    method: "put",
+    data 
+  }).then(response => {
+      this.setState(prevState => {
+        console.log('response is ', response.data);
+        prevState.events = prevState.events.concat(response.data);
+        return prevState;
+      });
+      console.log('in editEvent, events: ', this.state.events);
+    });
+  }
+
+  deleteEvent(data) {
+    this.setState({ dataLoaded: false });
+    console.log('in app.deleteEvent, data is ', data);
+    axios({
+    url: `http://localhost:8080/events/${data.id}`,
+    method: "delete"
+  }).then(response => {
+      this.setState(prevState => {
+        console.log('response is ', response.data);
+        prevState.events = prevState.events.concat(response.data);
+        return prevState;
+      });
+      console.log('in addEvent, events: ', this.state.events);
+    });
+  }
+
   queryUser() {
     axios({
       url: "http://localhost:8080/users/1",
@@ -94,6 +161,8 @@ class App extends Component {
                     {...props}
                     eventsData={this.state.events}
                     queryEvents={this.queryEvents}
+                    selectSlot={this.selectSlot}
+                    selectEvent={this.selectEvent}
                   />
                 );
               }}
@@ -121,12 +190,28 @@ class App extends Component {
                     {...props}
                     yelpData={this.state.yelpData}
                     queryYelp={this.queryYelp}
+                    slot={this.state.slot}
+                    addEvent={this.addEvent}
+                    queryEvents={this.queryEvents}
                   />
                 );
               }}
             />
 
-            <Route exact path="/editevent" component={EditEvent} />
+            <Route exact path="/editevent" render={props => {
+                return (
+                  <EditEvent
+                    {...props}
+                    yelpData={this.state.yelpData}
+                    queryYelp={this.queryYelp}
+                    event={this.state.event}
+                    editEvent={this.editEvent}
+                    deleteEvent={this.deleteEvent}
+                    queryEvents={this.queryEvents}
+                  />
+                    );
+              }}
+            />
           </Switch>
         </div>
       </BrowserRouter>
