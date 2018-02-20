@@ -8,23 +8,22 @@ import AddEvent from './AddEvent';
 BigCalendar.momentLocalizer(moment);
 const allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
 
-let addEv = () => {
-  console.log('in addEv')
-  return(
-  <React.Fragment>
-    <AddEvent />
-  </React.Fragment>
-)
-}
 
 export default class Calendar extends Component {
   constructor(props) {
     super(props);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   handleSelect(slotInfo) {
-    console.log('in handleSelect');
+    this.props.selectSlot(slotInfo);
+    this.props.history.push('/addevent');
+  }
+
+  handleEdit(event) {
+    this.props.selectEvent(event);
+    this.props.history.push('/editevent');
   }
 
   render() {
@@ -52,16 +51,16 @@ export default class Calendar extends Component {
           defaultView="month"
           scrollToTime={new Date(2010, 1, 1, 6)}
           defaultDate={new Date(2018, 1, 23)}
-          onSelectEvent={event => alert(event.title)}
+          onSelectEvent={event => {
+            if (window.confirm("Edit event?")) {
+              console.log('editing confirmed');
+              console.log('event: ', event);
+              this.handleEdit(event);
+            } else {
+               console.log('editing denied');
+            }}}
           onSelectSlot={slotInfo =>
-            {
-            alert(
-              `selected slot: \n\nstart ${slotInfo.start.toLocaleString()} ` +
-                `\nend: ${slotInfo.end.toLocaleString()}` +
-                `\naction: ${slotInfo.action}`
-            )
-            addEv()
-          }
+            this.handleSelect(slotInfo)
           }
         />
         </div>
