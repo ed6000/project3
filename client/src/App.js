@@ -19,6 +19,7 @@ class App extends Component {
       zip: 10001, 
       events: [],
       dataLoaded: false,
+      book: 'pinnochio'
     };
 
     console.log(this.state)
@@ -53,6 +54,20 @@ class App extends Component {
     }
   }).then(response => {
       this.setState({ yelpData: response.data });
+      console.log('app.state: ', this.state);
+    });
+  }
+
+  queryBooks(data) {
+    console.log('data: ', data);
+    axios({
+    url: "http://localhost:8080/addevent",
+    method: "post", 
+    data: {
+      book: data.book
+    }
+  }).then(response => {
+      this.setState({ book: response.data });
       console.log('app.state: ', this.state);
     });
   }
@@ -121,6 +136,8 @@ class App extends Component {
                     {...props}
                     yelpData={this.state.yelpData}
                     queryYelp={this.queryYelp}
+                    book={this.state.book}
+                    queryBooks={this.queryBooks}
                   />
                 );
               }}
