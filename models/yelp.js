@@ -2,10 +2,12 @@ const axios = require('axios');
 const Yelp = {};
 
 Yelp.queryFiveRestaurants = (req, res, next) => {
+  // const zipcode = req.body.zipcode;
   axios({
   method: "get",
   url:
-    "http://api.yelp.com/v3/businesses/search?term=food&location===10002&limit=5",
+    // `http://api.yelp.com/v3/businesses/search?term=food&location===${zipcode}&limit=5`,
+    `http://api.yelp.com/v3/businesses/search?term=food&location===10002&limit=5`,
   headers:{
     Authorization:
       `Bearer ${process.env.YELP_KEY}`
