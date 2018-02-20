@@ -1,21 +1,52 @@
 import React, { Component } from 'react';
 
 export default class AddEvent extends Component {
+  
+  resetState() {
+    this.setState({
+      yelpDatum: ""
+    })
+  }
+
   constructor(props) {
     super(props); 
       this.state = {
         yelpData: props.queryYelp
       }
+      this.changeHandler = this.changeHandler.bind(this);
+      this.submitHandler = this.submitHandler.bind(this);
     }
+
+  changeHandler(e) {
+    e.preventDefault();
+    this.setState({
+      yelpDatum: e.target.value
+    });
+  }
+
+  submitHandler(e) {
+    e.preventDefault();
+    const data = {yelpDatum: this.state.yelpDatum};
+    this.props.queryYelp(data);
+    this.resetState();
+  }
 
   render() {
     return  (
       <div>
       <h1>AddEvent Route</h1>
-      <form>
-        <input type='text' name='yelp' value='' />
-        <button type='submit'>Search for Restaurants</button>
-      </form>
+      <form onSubmit={this.submitHandler}>
+      <label>
+        <h3>Search for restaurants by zip code</h3>
+        <input 
+          type='text' 
+          name='yelpDatum' 
+          oncChange={this.changeHandler}
+          value={this.state.yelpDatum}
+          placeholder='Enter your zip code' />
+      </label>
+      <button type='submit'>Search</button>
+      
         {this.props.yelpData.map(el => {
           console.log("THESE ARE THE MAPPED YELP RESTAURANTS", el);
           return (
@@ -23,60 +54,15 @@ export default class AddEvent extends Component {
               <p>Name: {el.name}</p>
               <p>Address: {el.location.address1}</p>
               <p>Phone: {el.display_phone}</p>
-              <button>Add to calendar</button>
+              <button type='submit'>Add to calendar</button>
             </div>
           );
         })}
+      </form>
       </div>
       )
   }
 }
-
-    //   constructor() {
-    //     super();
-    //     this.state = {
-    //       fname: '',
-    //       lname: '',
-    //       email: '',
-    //     };
-      
-
-    //   onChange = (e) => {
-    //     // Because we named the inputs to match their corresponding values in state, it's
-    //     // super easy to update the state
-    //     const state = this.state
-    //     state[e.target.name] = e.target.value;
-    //     this.setState(state);
-    //   }
-
-    //   onSubmit = (e) => {
-    //     e.preventDefault();
-    //     // get our form data out of state
-    //     const { fname, lname, email } = this.state;
-
-    //     axios.post('/', { fname, lname, email })
-    //       .then((result) => {
-    //         //access the results here....
-    //         console.log(result.data);
-    //       });
-    //   }
-
-    //   render() {
-    //     const { fname, lname, email } = this.state;
-    //     return (
-    //       <form onSubmit={this.onSubmit}>
-    //         <input type="text" name="fname" value={fname} onChange={this.onChange} />
-    //         <input type="text" name="lname" value={lname} onChange={this.onChange} />
-    //         <input type="text" name="email" value={email} onChange={this.onChange} />
-    //         <button type="submit">Submit</button>
-    //       </form>
-    //     );
-    //   }
-    // }
-
-
-
-
 
 
 // export default class AddEvent extends Component {

@@ -8,20 +8,23 @@ import Profile from './components/Profile';
 import AddEvent from './components/AddEvent';
 import EditEvent from './components/EditEvent';
 import Calendar from './components/calendar.js'
-// import axios from 'axios'
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       yelpData: []
     };
+
     this.queryYelp = this.queryYelp.bind(this);
   }
 
-   queryYelp() {
+  componentDidMount() {
+    this.queryYelp();
+  }
+
+  queryYelp() {
     axios({
     url: "http://localhost:8080/addevent",
     method: "get"
@@ -32,8 +35,21 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
-    this.queryYelp();
+  postYelp(data) {
+    console.log(data);
+    axios({
+      url: "http://localhost:8080/addevent",
+      method: "post",
+      data
+    }). then(response => {
+      this.setState(prevState => {
+        console.log("POST SUCCESS!, response.data:", response.data)
+        return {
+          yelpData: prevState.yelpData.concat(response.data)
+        };
+      });
+      this.queryYelp();
+    })
   }
 
 
@@ -48,7 +64,7 @@ class App extends Component {
         {/* ^^^ Maybe change this routename to make it less confusing with Home component */}
         <Route path='/profile' component={Profile} />
 
-          // <Route path='/addevent' 
+        <Route path='/addevent' 
           render={props => { 
             return (
               <AddEvent
@@ -66,19 +82,7 @@ class App extends Component {
       </BrowserRouter>
     );
   }
-  // <Route path='/addevent' component={AddEvent} />
-
-          // <Route path='/addevent' 
-          // render={props => { 
-          //   return (
-          //     <AddEvent
-          //       {...props}
-          //       yelpData={this.state.yelpData}
-          //       queryYelp={this.queryYelp}
-          //       />
-          //     );
-          //   }} 
-          // />
+// <Route path='/addevent' component={AddEvent} />
 }
 
 export default App;
