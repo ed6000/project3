@@ -24,6 +24,7 @@ let Selectable = () => (
       Click an event to see more info, or drag the mouse over the calendar to
       select a date/time range.
     </h3>
+    <div className='calendar-gridcontainer'>
     <div className='calendar-container'>
     <BigCalendar
       selectable
@@ -43,6 +44,7 @@ let Selectable = () => (
       }
       }
     />
+    </div>
     </div>
   </React.Fragment>
 )
