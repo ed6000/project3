@@ -2,6 +2,28 @@ const db = require('../db/setup.js');
 
 const user = {};
 
+
+
+user.allUsers = (req, res, next) => {
+  const id = req.params.id;
+  db
+    .manyOrNone('SELECT * FROM users;')
+    .then(data => {
+      res.locals.user = data;
+      next();
+    })
+    .catch(error => {
+      console.log('error encountered in user.allUsers. Error:', error);
+      next(error);
+    });
+};
+
+
+
+
+
+
+
 user.findById = (req, res, next) => {
   const id = req.params.id;
   db
@@ -42,8 +64,8 @@ user.addUser = (req, res, next) => {
 user.editUser = (req, res, next) => {
   db
     .one(
-      'UPDATE users SET username = $1, password_digest = $2 WHERE id = $3 RETURNING *;',
-      [req.body.username, req.body.password, req.params.id]
+      'UPDATE users SET profile_avatar = $1, hobbies = $2 WHERE id = $3 RETURNING *;',
+      [req.body.profile_avatar, req.body.hobbies, req.params.id]
     )
     .then(data => {
       res.locals.user = data;
