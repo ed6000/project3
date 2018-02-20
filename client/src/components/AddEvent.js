@@ -41,7 +41,7 @@ export default class AddEvent extends Component {
         <input 
           type='text' 
           name='yelpDatum' 
-          oncChange={this.changeHandler}
+          onChange={this.changeHandler}
           value={this.state.yelpDatum}
           placeholder='Enter your zip code' />
       </label>
