@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
-import Login from "./components/Login";
 import NewUser from "./components/NewUser";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
@@ -17,14 +16,17 @@ class App extends Component {
     this.state = {
       yelpData: [],
       usersData: [],
-      zip: '10001'
+      zip: 10001
     };
+
+    console.log(this.state)
 
     this.queryYelp = this.queryYelp.bind(this);
     this.queryUser = this.queryUser.bind(this)
   }
 
   componentDidMount() {
+    console.log('in componentDidMount, this.state is ', this.state);
     this.queryYelp(this.state);
     this.queryUser();
   }
@@ -54,11 +56,6 @@ class App extends Component {
       );
       this.setState({ usersData: response.data });
     });
-  }
-
-  componentDidMount() {
-    this.queryYelp();
-    this.queryUser();
   }
 
   render() {
