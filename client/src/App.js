@@ -16,19 +16,31 @@ class App extends Component {
     this.state = {
       yelpData: [],
       usersData: [],
-      zip: 10001
+      zip: 10001, 
+      events: [],
+      dataLoaded: false,
     };
 
     console.log(this.state)
 
     this.queryYelp = this.queryYelp.bind(this);
-    this.queryUser = this.queryUser.bind(this)
+    this.queryUser = this.queryUser.bind(this);
+    this.queryEvents = this.queryEvents.bind(this);
+    this.toggleData = this.toggleData.bind(this);
+  }
+
+  toggleData() {
+    this.setState(prevState =>{
+      prevState.dataLoaded = !prevState.dataLoaded;
+      return prevState;
+    })
   }
 
   componentDidMount() {
-    console.log('in componentDidMount, this.state is ', this.state);
     this.queryYelp(this.state);
     this.queryUser();
+    this.queryEvents();
+    console.log('in componentDidMount, this.state is ', this.state);
   }
 
   queryYelp(data) {
@@ -42,6 +54,16 @@ class App extends Component {
   }).then(response => {
       this.setState({ yelpData: response.data });
       console.log('app.state: ', this.state);
+    });
+  }
+
+  queryEvents() {
+    axios({
+    url: "http://localhost:8080/events",
+    method: "get", 
+  }).then(response => {
+      this.setState({ events: response.data, dataLoaded: true });
+      console.log('events: ', this.state.events);
     });
   }
 
@@ -59,13 +81,23 @@ class App extends Component {
   }
 
   render() {
+    if (this.state.dataLoaded === true) {
     return (
       <BrowserRouter>
         <div className="App">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/newuser" component={NewUser} />
-            <Route exact path="/calendar" component={Calendar} />
+            <Route exact path="/calendar" render={props => {
+                return (
+                  <Calendar
+                    {...props}
+                    eventsData={this.state.events}
+                    queryEvents={this.queryEvents}
+                  />
+                );
+              }}
+            />
             <Route
               exact
               path="/profile"
@@ -99,6 +131,7 @@ class App extends Component {
         </div>
       </BrowserRouter>
     );
+  } return <div>LOADING...</div>
   }
 }
 

@@ -13,10 +13,11 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS events CASCADE;
 
 CREATE TABLE events (
-  id BIGSERIAL PRIMARY KEY,
+  id BIGSERIAL,
   user_id INTEGER REFERENCES users (id),
-  event_time VARCHAR,
-  event VARCHAR NOT NULL
+  title VARCHAR NOT NULL,
+  start VARCHAR NOT NULL,
+  end_time VARCHAR NOT NULL
 );
 
 DROP TABLE IF EXISTS invites CASCADE;
@@ -26,7 +27,7 @@ CREATE TABLE invites (
   user_id_creator INTEGER REFERENCES users (id),
   user_id_invitee INTEGER,
   event_id_creator INTEGER,
-  event_id INTEGER REFERENCES events (id),
+  event_id INTEGER,
   confirmation BOOLEAN
 );
 
