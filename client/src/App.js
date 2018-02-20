@@ -71,10 +71,10 @@ class App extends Component {
                 {...props}
                 yelpData={this.state.yelpData}
                 queryYelp={this.queryYelp}
-                />
-              );
-            }} 
-          />
+              />
+            );
+          }} 
+        />
 
         <Route path='/editevent' component={EditEvent} />
       </Switch>
