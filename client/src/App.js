@@ -14,24 +14,30 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      yelpData: []
+      yelpData: [],
+      zip: '10001'
     };
 
     this.queryYelp = this.queryYelp.bind(this);
   }
 
   componentDidMount() {
-    this.queryYelp();
+    this.queryYelp(this.state);
   }
 
-  queryYelp() {
+  queryYelp(data) {
+    console.log('data: ', data);
     axios({
     url: "http://localhost:8080/addevent",
-    method: "get"
+    method: "post", 
+    data: {
+      zip: data.zip
+    }
   }).then(response => {
-      console.log('In App.queryYelp, receieved response from server. response.data.businesses:', response.data
-      );
+      // console.log('In App.queryYelp, receieved response from server. response.data.businesses:', response.data
+      // );
       this.setState({ yelpData: response.data });
+      console.log('app.state: ', this.state);
     });
   }
 

@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 
 export default class AddEvent extends Component {
-  
-  resetState() {
+  constructor(props) {
+    super(props); 
+      this.state = {
+        yelpDatum: 10001
+      }
+      this.changeHandler = this.changeHandler.bind(this);
+      this.submitHandler = this.submitHandler.bind(this);
+      this.resetState = this.resetState.bind(this);
+    }
+
+ resetState() {
     this.setState({
       yelpDatum: ""
     })
   }
-
-  constructor(props) {
-    super(props); 
-      this.state = {
-        yelpData: props.queryYelp
-      }
-      this.changeHandler = this.changeHandler.bind(this);
-      this.submitHandler = this.submitHandler.bind(this);
-    }
 
   changeHandler(e) {
     e.preventDefault();
@@ -26,27 +26,28 @@ export default class AddEvent extends Component {
 
   submitHandler(e) {
     e.preventDefault();
-    const data = {yelpDatum: this.state.yelpDatum};
+    const data = {zip: this.state.yelpDatum};
+    console.log('state: ', this.state);
     this.props.queryYelp(data);
     this.resetState();
   }
 
   render() {
+    if (this.props.yelpData)
     return  (
       <div>
       <h1>AddEvent Route</h1>
+      <h3>Search for restaurants by zip code</h3>
       <form onSubmit={this.submitHandler}>
       <label>
-        <h3>Search for restaurants by zip code</h3>
         <input 
           type='text' 
           name='yelpDatum' 
           onChange={this.changeHandler}
-          value={this.state.yelpDatum}
           placeholder='Enter your zip code' />
       </label>
       <button type='submit'>Search</button>
-      
+      </form>
         {this.props.yelpData.map(el => {
           console.log("THESE ARE THE MAPPED YELP RESTAURANTS", el);
           return (
@@ -54,11 +55,10 @@ export default class AddEvent extends Component {
               <p>Name: {el.name}</p>
               <p>Address: {el.location.address1}</p>
               <p>Phone: {el.display_phone}</p>
-              <button type='submit'>Add to calendar</button>
             </div>
           );
         })}
-      </form>
+      
       </div>
       )
   }
