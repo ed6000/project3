@@ -2,8 +2,8 @@
 
 INSERT INTO users (username, password_digest, profile_avatar, hobbies)
 VALUES
-('maya', 'password', 'hbfherbfhber', 'jhfjefje'),
-('keisha', 'qwerty', 'kjcbkerbkhr', 'khbwew');
+('maya', 'password', null, null),
+('keisha', 'qwerty', null, null);
 
 INSERT INTO events (user_id, event_time, event)
 VALUES

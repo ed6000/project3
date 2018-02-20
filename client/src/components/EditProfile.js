@@ -5,10 +5,10 @@ class EditProfile extends Component {
   constructor(props) {
     super(props);
 
-    const profileDatum = this.props.profileDatum;
+    const usersData = this.props.usersData;
 
     this.state = {
-      profile_avatar: profileDatum.profile_avatar, hobbies: profileDatum.hobbies
+      profile_avatar: usersData.profile_avatar, hobbies: usersData.hobbies
     };
 
     this.changeHandler = this.changeHandler.bind(this);
@@ -25,7 +25,7 @@ class EditProfile extends Component {
   submitHandler(e) {
     e.preventDefault();
     axios({
-      url: `http://localhost:8080/users/${this.props.profileDatum.id}`,
+      url: `http://localhost:8080/users/${this.props.usersData.id}`,
       method: "PUT",
       data: this.state
     }).then(response => {
@@ -38,14 +38,14 @@ class EditProfile extends Component {
     return (
       <div>
         <form onSubmit={this.submitHandler}>
-          <label>{"profile_avatar"}</label>
+          <label>{"Enter image address for your profile avatar here:"}</label>
           <input
             type="text"
             name="profile_avatar"
             onChange={this.changeHandler}
             value={this.state.profile_avatar}
           />
-          <label>{"hobbies"}</label>
+          <label>{"Have any hobbies? Let the world know!"}</label>
           <input
             type="text"
             name="hobbies"
