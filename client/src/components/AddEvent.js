@@ -17,7 +17,7 @@ export default class AddEvent extends Component {
           return (
             <div key={el.id}>
               <p>Name:{el.name}</p>
-              <p>Address:{el.display_address}</p>
+              <p>Address:{el.location.address1}</p>
             </div>
           );
         })}

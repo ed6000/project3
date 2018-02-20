@@ -1,20 +1,34 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
+import ProfileItem from "./ProfileItem";
+import axios from "axios";
 
-export default class Profile extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      usersData: props.queryUser
-    };
+    this.profileBreakdown = this.profileBreakdown.bind(this);
+  }
+
+  profileBreakdown(profileDatum) {
+    return (
+      <ProfileItem
+        profileDatum={profileDatum}
+        queryUser={this.props.queryUser}
+      />
+    );
   }
 
   render() {
+
     return (
       <div>
-        <h1>Welcome {this.props.usersData.username}</h1>
+        <p>{this.props.usersData.profile_avatar}</p>
+        <h1>Welcome to your profile page {this.props.usersData.username}</h1>
+        <p>{this.props.usersData.hobbies}</p>
+        
       </div>
     );
   }
 }
+
+export default Profile;
