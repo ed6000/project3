@@ -8,31 +8,25 @@ export default class AddEvent extends Component {
       }
     }
 
-constructor(props) {
-    super(props);
-    this.state = {
-      books: props.queryBooks
-    }
-  }
-
   render() {
     return  (
       <div>
-<<<<<<< HEAD
-        {this.props.books.map(el => {
-          console.log("THESE ARE THE MAPPED BOOKS", el);
-          return (
-            <div key={el.id}>
-              <p>Books:{el.name}</p>
-=======
       <h1>AddEvent Route</h1>
+      <form>
+      <label>
+        <h3>Search for restaurants by zip code</h3>
+        <input type='text' name='yelp' />
+      </label>
+        <button type='submit'>Search by zip code</button>
+      </form>
         {this.props.yelpData.map(el => {
           console.log("THESE ARE THE MAPPED YELP RESTAURANTS", el);
           return (
             <div key={el.id}>
-              <p>Name:{el.name}</p>
-              <p>Address:{el.display_address}</p>
->>>>>>> 2023e92e63ba5a6a91c2abafe565864b608e037f
+              <p>Name: {el.name}</p>
+              <p>Address: {el.location.address1}</p>
+              <p>Phone: {el.display_phone}</p>
+              <button>Add to calendar</button>
             </div>
           );
         })}
@@ -40,14 +34,3 @@ constructor(props) {
       )
   }
 }
-
-// export default class AddEvent extends Component {
-
-//   render() {
-//     return (
-//       <div>
-//       This is the AddEvent Route
-//       </div>
-//       )
-//   }
-// }

@@ -15,17 +15,16 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-<<<<<<< HEAD
     // Assuming we want to store the Books data as an array:
-    this.state = { Books: [] };
+    this.state = { Books: [], yelpData: [] };
 
     this.queryBooks = this.queryBooks.bind(this);
-    this.editBooks = this.editBook.bind(this);
+    this.queryYelp = this.queryYelp.bind(this);
   }
 
   queryBooks() {
     axios({
-      url: `https://www.goodreads.com/search.xml?key=${process.env.GR_KEY}&q={searchTerm}`,
+      url: "http://localhost:8080/editevent",
       method: "get"
     }).then(response => {
       console.log(
@@ -37,17 +36,16 @@ class App extends Component {
   }
   componentDidMount() {
     this.queryBooks();
-  }
-  componentWillUnmount() {
-    this.queryBooks.abort();
+    this.queryYelp();
   }
 
-=======
-    this.state = {
-      yelpData: []
-    };
-    this.queryYelp = this.queryYelp.bind(this);
-  }
+
+
+  //   this.state = {
+  //     yelpData: []
+  //   };
+  //   this.queryYelp = this.queryYelp.bind(this);
+  // }
 
    queryYelp() {
     axios({
@@ -60,12 +58,10 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
-    this.queryYelp();
-  }
 
 
->>>>>>> 2023e92e63ba5a6a91c2abafe565864b608e037f
+
+
   render() {
     return (
       <BrowserRouter>
@@ -88,7 +84,17 @@ class App extends Component {
             }} 
           />
 
-        <Route path='/editevent' component={EditEvent} />
+        <Route path='/editevent'
+        render={props => { 
+            return (
+              <EditEvent
+                {...props}
+                Books={this.state.Books}
+                queryBooks={this.queryBooks}
+                />
+              );
+            }} 
+          />
       </Switch>
       </div>
       </BrowserRouter>

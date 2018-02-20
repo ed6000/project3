@@ -1,22 +1,18 @@
 const axios = require('axios');
-const goodreads = {};
+const Goodreads = {};
 
-goodreads.queryBooks = (req, res, next) => {
+Goodreads.queryBooks = (req, res, next) => {
   axios({
   method: "get",
-  url:`https://www.goodreads.com/search.xml?key=${process.env.GR_KEY}&q={searchTerm}`,
-  headers:{
-    Authorization:
-      `Bearer ${process.env.GR_KEY}`
-  }
+  url:`https://www.googleapis.com/books/v1/volumes?q=moby+dick`,
 })
   .then(response => {
-    res.locals.yelpData = response.data.businesses;
+    res.locals.book = response.data.GoodreadsResponse;
     console.log(process.env.GR_KEY);
     next();
   })
   .catch(error => {
-    console.log('error encountered in yelp.yelpData. error: ', error);
+    console.log('error encountered in goodreads.goodreadsData. error: ', error);
     next(error);
   });
 };
@@ -25,4 +21,4 @@ goodreads.queryBooks = (req, res, next) => {
 
 
 
-module.exports = goodreads;
+module.exports = Goodreads;
