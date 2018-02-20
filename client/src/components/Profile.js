@@ -5,7 +5,7 @@ export default class Profile extends Component {
   render() {
     return (
       <div>
-        This is the Profile route
+        <h1>Welcome to your profile!</h1>
       </div>
       )
   }

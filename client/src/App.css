@@ -6,12 +6,12 @@
   height: 700px;
 }
 
-.homepage-text {
+.homepage-text, .register-text {
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: 1fr 4fr 1fr;
 }
 
-.homepage-text > p {
+.homepage-text > p, .register-text > p  {
   grid-column: 2 / span 1;
 }
