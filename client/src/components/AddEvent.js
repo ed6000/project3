@@ -12,20 +12,25 @@ export default class AddEvent extends Component {
         start: this.props.slot.start,
         end_time: this.props.slot.end,
         keyword: "",
-        book: this.props.book
+        book: this.props.book,
+        ticketDatum: "Los Angeles"
       }
       this.changeHandler = this.changeHandler.bind(this);
-      this.submitHandler = this.submitHandler.bind(this);
+      this.submitYelp = this.submitYelp.bind(this);
+      this.submitBook = this.submitBook.bind(this);
+      this.submitTicket = this.submitTicket.bind(this);
       this.resetState = this.resetState.bind(this);
       this.showRestaurant = this.showRestaurant.bind(this);
       this.addEvent = this.addEvent.bind(this);
       this.showBooks = this.showBooks.bind(this);
+      this.showTickets = this.showTickets.bind(this);
     }
 
  resetState() {
     this.setState({
       yelpDatum: "",
-      bookData: ""
+      bookData: "",
+      ticketDatum: "Los Angeles"
     })
   }
 
@@ -36,7 +41,6 @@ export default class AddEvent extends Component {
       start: String(this.state.start),
       end_time: String(this.state.end_time),
     }
-    console.log('in addEvent.addEvent, data is ', data);
     this.props.addEvent(data);
     this.props.queryEvents();
     this.props.history.push('/calendar');
@@ -47,17 +51,27 @@ export default class AddEvent extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-    console.log('in changeHandler, state is ', this.state);
   }
 
-  submitHandler(e) {
+  submitYelp(e) {
     e.preventDefault();
     const data = {zip: this.state.yelpDatum};
-    console.log('state: ', this.state);
     this.props.queryYelp(data);
     this.resetState();
+  }
+
+  submitBook(e) {
+    e.preventDefault();
     const bookData = {keyword: this.state.keyword};
     this.props.queryBooks(bookData);
+    this.resetState();
+  }
+
+  submitTicket(e) {
+    e.preventDefault();
+    const ticketData = {city: this.state.ticketDatum};
+    this.props.queryTicket(ticketData);
+    this.resetState();
   }
 
   showRestaurant(e) {
@@ -72,6 +86,14 @@ export default class AddEvent extends Component {
     e.preventDefault;
     this.setState(prevState => {
       prevState.showBooks = !prevState.showBooks;
+      return prevState;
+    })
+  }
+
+  showTickets(e) {
+    e.preventDefault;
+    this.setState(prevState => {
+      prevState.showTickets = !prevState.showTickets;
       return prevState;
     })
   }
@@ -108,7 +130,8 @@ export default class AddEvent extends Component {
         </form>
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
-        <form onSubmit={this.submitHandler}>
+        <input type='button' onClick={this.showTickets} value='Search for tickets' />
+        <form onSubmit={this.submitYelp}>
         <label>
           <input 
             type='text' 
@@ -130,15 +153,6 @@ export default class AddEvent extends Component {
         </div>
       )
     } else if (this.state.showBooks === true) {
-      const bookObj = this.state.book.map((el, index) => {
-            console.log("THESE ARE THE MAPPED BOOKS", el);
-            return (
-              <div key={index}>
-                <p>Book Title: {el.volumeInfo.title}</p>
-                <p>Author: {el.volumeInfo.authors}</p>
-               </div>
-            );
-          })
       return (
         <div>
         <h1>Add an Event!</h1>
@@ -168,7 +182,8 @@ export default class AddEvent extends Component {
         </form>
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
-        <form onSubmit={this.submitHandler}>
+        <input type='button' onClick={this.showTickets} value='Search for tickets' />
+        <form onSubmit={this.submitBook}>
         <label>
           <input 
             type='text' 
@@ -179,7 +194,6 @@ export default class AddEvent extends Component {
         <button type='submit'>Search</button>
         </form>
           <div>{this.props.book.map((el, index) => {
-            console.log("THESE ARE THE MAPPED BOOKS", el);
             return (
               <div key={index}>
                 <p>Book Title: {el.volumeInfo.title}</p>
@@ -189,7 +203,60 @@ export default class AddEvent extends Component {
           })}</div>
         </div>
       )
-    } return (
+    } else if (this.state.showTickets === true) {
+      return (
+        <div>
+        <h1>Add an Event!</h1>
+        <form onSubmit={this.addEvent}>
+        <label>Event
+          <input 
+            type='text' 
+            name='title' 
+            onChange={this.changeHandler}
+            placeholder='Enter your event' />
+        </label><br />
+        <label>From
+          <input 
+            type='text' 
+            name='start' 
+            onChange={this.changeHandler}
+            value={this.props.slot.start} />
+        </label><br />
+        <label>To
+          <input 
+            type='text' 
+            name='end_time' 
+            onChange={this.changeHandler}
+            value={this.props.slot.end} />
+        </label><br />
+        <button type='submit'>Add Event</button>
+        </form>
+          <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
+          <input type='button' onClick={this.showBooks} value='Search for books' />
+          <input type='button' onClick={this.showTickets} value='Search for tickets' />
+          <form onSubmit={this.submitTicket}>
+        <label>
+          <input 
+            type='text' 
+            name='ticketDatum' 
+            onChange={this.changeHandler}
+            placeholder='Enter your city name' />
+        </label>
+        <button type='submit'>Search</button>
+        </form>
+        <div>{this.props.ticketData.map(el => {
+          return (
+            <div key={el.id}>
+              <p>{el.name}</p>
+              <h5>{el._embedded.venues[0].name}</h5>
+              <h6>{el._embedded.venues[0].address.line1}</h6>
+              <h6>{el.dates.start.localDate}</h6>
+            </div>
+          );
+        })}</div>
+        </div>
+      )
+    }return (
         <div>
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
@@ -218,6 +285,7 @@ export default class AddEvent extends Component {
         </form>
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
+        <input type='button' onClick={this.showTickets} value='Search for tickets' />
         </div>
         )
   }

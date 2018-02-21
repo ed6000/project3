@@ -7,7 +7,6 @@ import Profile from "./components/Profile";
 import AddEvent from "./components/AddEvent";
 import EditEvent from "./components/EditEvent";
 import EditProfile from "./components/EditEvent";
-import Ticket from "./components/Ticket";
 import Calendar from "./components/calendar.js";
 import "./App.css";
 
@@ -56,116 +55,101 @@ class App extends Component {
     this.queryEvents();
     const sample = { keyword: 'magic'};
     this.queryBooks(sample);
-    console.log("in componentDidMount, this.state is ", this.state);
+  }
+
+  queryEvents() {
+    this.setState({ dataLoaded: false });
+    axios({
+      url: "http://localhost:8080/events",
+      method: "get"
+    }).then(response => {
+      this.setState({ events: response.data, dataLoaded: true });
+    });
   }
 
   queryYelp(data) {
-    console.log("data: ", data);
     axios({
-      url: "http://localhost:8080/addevent",
+      url: "http://localhost:8080/events/addYelp",
       method: "post",
       data: {
         zip: data.zip
       }
     }).then(response => {
       this.setState({ yelpData: response.data });
-      console.log("app.state: ", this.state);
     });
   }
 
   queryBooks(data) {
-    console.log('in queryBooks, data: ', data);
     axios({
-    url: "http://localhost:8080/addbook",
+    url: "http://localhost:8080/events/addBook",
     method: "post", 
     data
   }).then(response => {
       this.setState({ book: response.data });
-      console.log('app.state: ', this.state);
-    });
-  }
-
-  queryEvents() {
-    axios({
-      url: "http://localhost:8080/events",
-      method: "get"
-    }).then(response => {
-      this.setState({ events: response.data, dataLoaded: true });
-      console.log("events: ", this.state.events);
     });
   }
 
   queryTicket(data) {
-    console.log("data: ", data);
     axios({
-      url: "http://localhost:8080/ticket",
+      url: "http://localhost:8080/events/addTicket",
       method: "post",
       data: {
         city: data.city
       }
     }).then(response => {
       this.setState({ ticketData: response.data });
-      console.log("app.state: ", this.state);
     });
   }
 
   selectSlot(slotInfo) {
     this.setState({ slot: slotInfo });
-    console.log("in selectSlot, slot is ", this.state.slot);
   }
 
   addEvent(data) {
     this.setState({ dataLoaded: false });
-    console.log("in app.addEvent, data is ", data);
     axios({
       url: "http://localhost:8080/events",
       method: "post",
       data
     }).then(response => {
       this.setState(prevState => {
-        console.log("response is ", response.data);
         prevState.events = prevState.events.concat(response.data);
         return prevState;
       });
-      console.log("in addEvent, events: ", this.state.events);
+      this.queryEvents();
     });
   }
 
   selectEvent(event) {
     this.setState({ event: event });
-    console.log("in selectEvent, event ", event);
   }
 
   editEvent(data) {
     this.setState({ dataLoaded: false });
-    console.log("in app.editEvent, data is ", data);
     axios({
       url: `http://localhost:8080/events/${data.id}`,
       method: "put",
       data
     }).then(response => {
       this.setState(prevState => {
-        console.log("response is ", response.data);
         prevState.events = prevState.events.concat(response.data);
         return prevState;
       });
-      console.log("in editEvent, events: ", this.state.events);
+      this.queryEvents();
     });
   }
 
   deleteEvent(data) {
     this.setState({ dataLoaded: false });
-    console.log("in app.deleteEvent, data is ", data);
     axios({
       url: `http://localhost:8080/events/${data.id}`,
       method: "delete"
     }).then(response => {
       this.setState(prevState => {
-        console.log("response is ", response.data);
         prevState.events = prevState.events.concat(response.data);
         return prevState;
       });
-      console.log("in addEvent, events: ", this.state.events);
+      this.queryEvents();
     });
   }
 
@@ -174,10 +158,6 @@ class App extends Component {
       url: "http://localhost:8080/users/1",
       method: "get"
     }).then(response => {
-      console.log(
-        "In App.queryUsers, received response from server. response.data:",
-        response.data
-      );
       this.setState({ usersData: response.data });
     });
   }
@@ -201,6 +181,7 @@ class App extends Component {
                       queryEvents={this.queryEvents}
                       selectSlot={this.selectSlot}
                       selectEvent={this.selectEvent}
+                      dataLoaded={this.state.dataLoaded}
                     />
                   );
                 }}
@@ -233,25 +214,13 @@ class App extends Component {
                       queryEvents={this.queryEvents}
                       queryBooks={this.queryBooks}
                       book={this.state.book}
-                    />
-                  );
-                }}
-              />
-
-              <Route
-                exact
-                path="/ticket"
-                render={props => {
-                  return (
-                    <Ticket
-                      {...props}
-                      ticketData={this.state.ticketData}
                       queryTicket={this.queryTicket}
+                      ticketData={this.state.ticketData}
+
                     />
                   );
                 }}
               />
-
               <Route
                 exact
                 path="/editevent"

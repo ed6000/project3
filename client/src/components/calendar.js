@@ -12,6 +12,10 @@ const allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
 export default class Calendar extends Component {
   constructor(props) {
     super(props);
+    this.state = { 
+      dataLoaded: this.props.dataLoaded,
+      events: this.props.eventsData
+    };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
   }
@@ -27,8 +31,7 @@ export default class Calendar extends Component {
   }
 
   render() {
-    const events = this.props.eventsData.map(event => {
-      console.log(event);
+    const events = this.state.events.map(event => {
       return {
         id: event.id,
         title: event.title,
@@ -36,7 +39,6 @@ export default class Calendar extends Component {
         end: new Date(event.end_time)
       }
     });
-    console.log('events: ', events);
     const MyCalendar = props => (
       <React.Fragment>
         <h3 className="callout">
@@ -53,8 +55,6 @@ export default class Calendar extends Component {
           defaultDate={new Date(2018, 1, 23)}
           onSelectEvent={event => {
             if (window.confirm("Edit event?")) {
-              console.log('editing confirmed');
-              console.log('event: ', event);
               this.handleEdit(event);
             } else {
                console.log('editing denied');
@@ -67,6 +67,10 @@ export default class Calendar extends Component {
         </div>
       </React.Fragment>
     );
-    return <div className="calendar-container">{MyCalendar()}</div>
+    if (this.state.dataLoaded === true) {
+      return <div className="calendar-container">{MyCalendar()}</div>
+    } else { 
+      return <div>LOADING EVENTS...</div>
+       } 
   }
 }

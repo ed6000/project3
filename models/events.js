@@ -1,3 +1,4 @@
+const axios = require('axios');
 const db = require('../db/setup.js');
 
 const events = {};
@@ -47,6 +48,61 @@ events.addEvent = (req, res, next) => {
         'Error encounted in events.addEvent pgpromise call, error:',
         err
       );
+    });
+};
+
+events.addYelp = (req, res, next) => {
+  zip = req.body.zip;
+  axios({
+  method: "get",
+  url: `http://api.yelp.com/v3/businesses/search?term=food&location===${zip},usa&limit=5`,
+  headers:{
+    Authorization:
+      `Bearer ${process.env.YELP_KEY}`
+  }
+})
+  .then(response => {
+    res.locals.yelp = response.data.businesses;
+    next();
+  })
+  .catch(error => {
+    console.log('error encountered in events.addYelp. error: ', error);
+    next(error);
+  });
+};
+
+events.addBook = (req, res, next) => {
+  const keyword = req.body.keyword;
+  axios({
+  method: "get",
+  url: `https://www.googleapis.com/books/v1/volumes?q=${keyword}`,
+})
+  .then(response => {
+    res.locals.books = response.data.items;
+    console.log('response: ', response.data.items);
+    next();
+  })
+  .catch(error => {
+    console.log('error encountered in events.addBook error: ', error);
+    next(error);
+  });
+};
+
+events.addTicket = (req, res, next) => {
+  city = req.body.city;
+  axios({
+    method: "get",
+    url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${
+      process.env.TICKET_KEY
+    }&size=5&city=${city}`
+  })
+    .then(response => {
+      res.locals.tickets = response.data._embedded.events;
+      next();
+    })
+    .catch(error => {
+      console.log("error encountered in events.addTicket, error: ", error);
+      next(error);
     });
 };
 

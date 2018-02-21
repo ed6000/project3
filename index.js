@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 8080;
 const dotenv = require('dotenv').config();
+const cors = require('cors');
 
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
@@ -19,6 +20,8 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -38,18 +41,10 @@ app.listen(port, () => {
 const usersRouter = require('./controllers/users.js');
 const eventsRouter = require('./controllers/events.js');
 const invitesRouter = require('./controllers/invites.js');
-const yelpRouter = require('./controllers/yelp.js');
-const bookRouter = require('./controllers/gbooks.js');
-const ticketRouter = require('./controllers/ticket.js');
-
 
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 app.use('/invites', invitesRouter);
-app.use('/addevent', yelpRouter);
-app.use('/addbook', bookRouter);
-app.use('/ticket', ticketRouter);
-
 
 app.use((err, req, res, next) => {
   console.log('Error encountered:', err);
