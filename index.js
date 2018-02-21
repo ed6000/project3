@@ -40,12 +40,16 @@ const eventsRouter = require('./controllers/events.js');
 const invitesRouter = require('./controllers/invites.js');
 const yelpRouter = require('./controllers/yelp.js');
 const bookRouter = require('./controllers/gbooks.js');
+const ticketRouter = require('./controllers/ticket.js');
+
 
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 app.use('/invites', invitesRouter);
 app.use('/addevent', yelpRouter);
 app.use('/addbook', bookRouter);
+app.use('/ticket', ticketRouter);
+
 
 app.use((err, req, res, next) => {
   console.log('Error encountered:', err);
