@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
+import Logo from "./Logo";
+
 
 export default class NewUser extends Component {
 
@@ -34,10 +36,13 @@ export default class NewUser extends Component {
 
   render() {
     return (
+      <BrowserRouter>
       <div>
         <header>
           <h1>Welcome to PlanIt!</h1>
         </header>
+        <Logo />
+
         <h3>Register Here:</h3>
 
         <form onSubmit={this.handleSubmit}>
@@ -65,6 +70,7 @@ export default class NewUser extends Component {
           <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
         </footer>
       </div>
+      </BrowserRouter>
     )
   }
 }

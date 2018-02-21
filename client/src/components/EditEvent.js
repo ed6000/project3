@@ -76,7 +76,7 @@ export default class EditEvent extends Component {
       return  (
         <div>
         <h1>Edit an Event!</h1>
-        <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
+        <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <form onSubmit={this.submitHandler}>
         <label>
           <input 
@@ -126,7 +126,7 @@ export default class EditEvent extends Component {
         <button type='submit'>Edit Event</button>
         <input type='button' onClick={this.delete} value='Delete event' />
         </form>
-        <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
+        <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         </div>
         )
   }

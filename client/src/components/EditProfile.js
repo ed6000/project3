@@ -36,22 +36,31 @@ class EditProfile extends Component {
 
   render() {
     return (
-      <div>
+      <div className='edit-profile-form'>
         <form onSubmit={this.submitHandler}>
+        <br />
           <label>{"Enter image address for your profile avatar here:"}</label>
+          <br />
+          <br />
           <input
+            className='profile-input'
             type="text"
             name="profile_avatar"
             onChange={this.changeHandler}
             value={this.state.profile_avatar}
           />
+          <br />
+          <br />
           <label>{"Have any hobbies? Let the world know!"}</label>
-          <input
+          <br />
+          <br />
+          <textarea
             type="text"
             name="hobbies"
             onChange={this.changeHandler}
             value={this.state.hobbies}
           />
+          <br />
           <input type="submit" value="submit" />
         </form>
       </div>
