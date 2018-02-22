@@ -29,6 +29,14 @@ export default class Calendar extends Component {
     this.props.history.push('/editevent');
   }
 
+  componentDidMount() {
+    const colorData = 'stars_bg';
+    this.props.changeBackground(colorData);
+    console.log('in componentDidMount calendar, colorData is ', colorData);
+  }
+  componentWillUnmount() {
+    this.props.changeBackground("");
+}
   render() {
     const events = this.state.events.map(event => {
       return {

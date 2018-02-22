@@ -24,7 +24,9 @@ class App extends Component {
       book: [],
       slot: {},
       event: {},
-      user: {}
+      user: {},
+      background: '', 
+      changed: false
     };
 
     console.log(this.state);
@@ -42,6 +44,7 @@ class App extends Component {
     this.register = this.register.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.changeBackground = this.changeBackground.bind(this);
   }
 
   register(data) {
@@ -69,6 +72,14 @@ class App extends Component {
   logout(ev) {
     ev.preventDefault();
     TokenService.destroy();
+  }
+
+  changeBackground(colorData) {
+    console.log('changeBackground invoked, colorData', colorData);
+    if (this.state.background !== colorData) {
+    this.setState({ 'background': colorData, 'changed': true });
+  }
+    console.log('in changeBackground, color is ', this.state.background, this.state.changed);
   }
 
   toggleData() {
@@ -192,14 +203,10 @@ class App extends Component {
   }
 
   render() {
-    const styles = 
-    { backgroundColor: 'white',
-    height: '100vh',
-    width: '100vw'};
     if (this.state.dataLoaded === true) {
       return (
         <BrowserRouter>
-          <div className="App">
+          <div className={"App " + this.state.background}>
             <Switch>
               <Route exact path="/" render={props => {
                 return (<Home {...props} submit={this.login} />)
@@ -221,6 +228,7 @@ class App extends Component {
                       selectSlot={this.selectSlot}
                       selectEvent={this.selectEvent}
                       dataLoaded={this.state.dataLoaded}
+                      changeBackground={this.changeBackground.bind(this)}
                     />
                   );
                 }}
@@ -284,7 +292,7 @@ class App extends Component {
       );
     }
     // return <div>LOADING...</div>;
-     return <div style={styles}><img className='loading' src={'./images/animated_loading.gif'} /></div>
+     return <div className="*"><img className='loading' src={'./images/animated_loading.png'} /></div>
   }
 }
 
