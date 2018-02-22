@@ -26,13 +26,15 @@ export default class Home extends Component {
     this.props.submit(this.state);
     this.props.history.push('/calendar');
   }
-
+  simpleCSS(e){
+    e.target.setAttribute("style", "transform: translate(-4px, -4px);", "box-shadow: 0 5px 15px rgba(0,0,0,0.3);");
+  }
   render() {
     return (
       <div>
         <Logo />
         <h2>Login here:</h2>
-        <form class='login' onSubmit={this.handleSubmit}>
+        <form class='login' onMouseOver={this.simpleCSS} onSubmit={this.handleSubmit}>
         <label>Username:
           <p><input
             placeholder='Enter your username'
@@ -41,7 +43,6 @@ export default class Home extends Component {
             onChange={this.handleChange}
             value={this.state.username} /></p>
         </label>
-        <br />
         <label>Password:
           <p><input
             placeholder='Enter your password'
@@ -50,7 +51,6 @@ export default class Home extends Component {
             onChange={this.handleChange}
             value={this.state.password} /></p>
         </label>
-        <br />
         <button className='homebtn' type="submit" value="Submit">Submit</button>
       </form>
         <br />

@@ -102,7 +102,6 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   transform: translate(-4px, -4px);
   transition: 1s;
-  border-color: red;
 }
 
 input {
