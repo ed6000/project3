@@ -4,6 +4,7 @@ import BigCalendar from 'react-big-calendar';
 import '../../node_modules/react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment';
 import '../App.css';
+import NavBar from './NavBar';
 
 
 BigCalendar.momentLocalizer(moment);
@@ -49,6 +50,7 @@ export default class Calendar extends Component {
     });
     const MyCalendar = props => (
       <React.Fragment>
+      <NavBar />
         <h3 className="callout">
           Click an event to see more info, or drag the mouse over the calendar to
           select a date/time range.

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NavBar from './NavBar';
 
 export default class AddEvent extends Component {
   constructor(props) {
@@ -103,6 +104,7 @@ export default class AddEvent extends Component {
     if (this.state.showRestaurant === true) {
       return  (
         <div>
+        <NavBar />
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event
@@ -159,6 +161,7 @@ export default class AddEvent extends Component {
     } else if (this.state.showBooks === true) {
       return (
         <div>
+        <NavBar />
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event
@@ -214,6 +217,7 @@ export default class AddEvent extends Component {
     } else if (this.state.showTickets === true) {
       return (
         <div>
+        <NavBar />
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event
@@ -270,6 +274,7 @@ export default class AddEvent extends Component {
       )
     }return (
         <div>
+        <NavBar />
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event

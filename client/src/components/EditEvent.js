@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NavBar from './NavBar';
 
 export default class EditEvent extends Component {
   constructor(props) {
@@ -74,6 +75,7 @@ export default class EditEvent extends Component {
     if (this.state.showRestaurant === true) {
       return  (
         <div>
+        <NavBar />
         <h1>Edit an Event!</h1>
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <form onSubmit={this.submitHandler}>
@@ -99,6 +101,7 @@ export default class EditEvent extends Component {
       )
     } return (
         <div>
+        <NavBar />
         <h1>Edit an Event!</h1>
         <form onSubmit={this.editEvent}>
         <label>Event

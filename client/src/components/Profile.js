@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import EditProfile from "./EditProfile";
-
+import NavBar from "./NavBar";
 
 class Profile extends Component {
   constructor(props) {
@@ -41,6 +41,8 @@ class Profile extends Component {
         />
       );
     } return (
+      <div>
+      <NavBar />
       <div className='grid-container'>
       
         <p className='profile-img'><img className='avatar' src={this.props.usersData.profile_avatar} /></p>
@@ -52,6 +54,7 @@ class Profile extends Component {
         </h1>
         <p className='profile-hobbies'>My hobbies: <br /> {this.props.usersData.hobbies}</p> 
         <input className='profile-button' type='button' value='Logout' onClick={this.logout} />
+      </div>
       </div>
     );
   } 
