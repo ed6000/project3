@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import BigCalendar from 'react-big-calendar';
 import '../../node_modules/react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment';
@@ -62,6 +63,7 @@ export default class Calendar extends Component {
             this.handleSelect(slotInfo)
           }
         />
+        <Link to='/profile'>go to profile</Link>
         </div>
         </div>
       </React.Fragment>

@@ -19,8 +19,8 @@ events.allEvents = (req, res, next) => {
 events.findById = (req, res, next) => {
   const id = req.params.id;
   db
-    .one(
-      'SELECT * FROM events WHERE id = ${id};',
+    .any(
+      'SELECT * FROM events WHERE user_id = ${id};',
       { id: id }
     )
     .then(data => {

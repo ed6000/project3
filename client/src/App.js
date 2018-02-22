@@ -16,7 +16,6 @@ class App extends Component {
     this.state = {
       yelpData: [],
       ticketData: [],
-      usersData: [],
       zip: 10001,
       city: "Los Angeles",
       events: [],
@@ -24,7 +23,8 @@ class App extends Component {
       book: [],
       slot: {},
       event: {},
-      user: {}
+      user: {},
+      userData: {}
     };
 
     console.log(this.state);
@@ -42,10 +42,11 @@ class App extends Component {
     this.register = this.register.bind(this);
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
+    this.queryUser = this.queryUser.bind(this);
   }
 
   register(data) {
-    axios('http://localhost:8080/users/', {
+    axios('/users/', {
       method: "POST",
       data
     }).then(resp => {
@@ -55,13 +56,28 @@ class App extends Component {
   }
 
   login(data) {
-    axios('http://localhost:8080/users/login', {
+    console.log('login data', data);
+    axios('/users/login', {
       method: "POST",
       data
     }).then(resp => {
       TokenService.save(resp.data.token);
       this.setState({ user: resp.data.user})
       console.log('this.state.user is ', this.state.user)
+      this.queryEvents();
+      this.queryUser(resp.data.user.id);
+    })
+    .catch(err => console.log(`err: ${err}`));
+  }
+
+  queryUser(id) {
+    console.log('in queryUser, this.state.user.id is ', this.state.user.id);
+    axios(`/users/${id}`, {
+      method: "GET"
+    }).then(resp => {
+      TokenService.save(resp.data.token);
+      this.setState({ userData: resp.data})
+      console.log('this.state.userData is ', this.state.userData)
     })
     .catch(err => console.log(`err: ${err}`));
   }
@@ -86,7 +102,7 @@ class App extends Component {
   queryEvents() {
     this.setState({ dataLoaded: false });
     axios({
-      url: "http://localhost:8080/events",
+      url: `/events/${this.state.user.id}`,
       method: "get",
       headers: {
         Authorization: `Bearer ${TokenService.read()}`,
@@ -98,7 +114,7 @@ class App extends Component {
 
   queryYelp(data) {
     axios({
-      url: "http://localhost:8080/events/addYelp",
+      url: "/events/addYelp",
       method: "post",
       data: {
         zip: data.zip
@@ -110,7 +126,7 @@ class App extends Component {
 
   queryBooks(data) {
     axios({
-    url: "http://localhost:8080/events/addBook",
+    url: "/events/addBook",
     method: "post", 
     data
   }).then(response => {
@@ -120,7 +136,7 @@ class App extends Component {
 
   queryTicket(data) {
     axios({
-      url: "http://localhost:8080/events/addTicket",
+      url: "/events/addTicket",
       method: "post",
       data: {
         city: data.city
@@ -136,8 +152,10 @@ class App extends Component {
 
   addEvent(data) {
     this.setState({ dataLoaded: false });
+    data.id = this.state.user.id;
+    console.log('in addEvent, data is ', data);
     axios({
-      url: "http://localhost:8080/events",
+      url: "/events",
       method: "post",
       data,
       headers: {
@@ -159,7 +177,7 @@ class App extends Component {
   editEvent(data) {
     this.setState({ dataLoaded: false });
     axios({
-      url: `http://localhost:8080/events/${data.id}`,
+      url: `/events/${data.id}`,
       method: "put",
       data,
       headers: {
@@ -177,7 +195,7 @@ class App extends Component {
   deleteEvent(data) {
     this.setState({ dataLoaded: false });
     axios({
-      url: `http://localhost:8080/events/${data.id}`,
+      url: `/events/${data.id}`,
       method: "delete",
       headers: {
         Authorization: `Bearer ${TokenService.read()}`,
@@ -232,9 +250,9 @@ class App extends Component {
                   return (
                     <Profile
                       {...props}
-                      usersData={this.state.usersData}
-                      queryUser={this.queryUser}
+                      usersData={this.state.userData}
                       logout={this.logout}
+                      queryUser={this.queryUser}
                     />
                   );
                 }}

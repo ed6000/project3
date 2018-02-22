@@ -18,8 +18,13 @@ router.post('/login', users.login, (req, res) => {
     res.status(401).json({err: 'Login Failed'})
   } else {
     const { password_digest, ...user } = res.locals.user;
-    res.json({token: res.locals.token, user});
+    console.log('res.locals.user', res.locals.user);
+    res.json({token: res.locals.token, user: res.locals.user});
   }
+});
+
+router.get('/:id', users.findById, (req, res) => {
+  res.json(res.locals.user);
 });
 
 router.put('/:id', users.editUser, (req, res) => {

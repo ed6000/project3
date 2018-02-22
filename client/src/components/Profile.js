@@ -12,7 +12,10 @@ class Profile extends Component {
     this.editProfile = this.editProfile.bind(this);
   }
 
-  
+  componentDidMount() {
+    console.log('this.props.usersData', this.props.usersData);
+  }
+
   editProfile(e) {
     e.preventDefault();
     this.setState(prevState => {
@@ -22,6 +25,7 @@ class Profile extends Component {
   }
 
   render() {
+    console.log('in Profile, this.props.usersData is ', this.props.usersData);
     let checkProfileEdit = null;
     if (this.state.editing) {
       checkProfileEdit = (
@@ -30,9 +34,7 @@ class Profile extends Component {
           usersData={this.props.usersData}
         />
       );
-    }
-
-    return (
+    } return (
       <div className='grid-container'>
       
         <p className='profile-img'><img className='avatar' src={this.props.usersData.profile_avatar} /></p>
@@ -45,7 +47,7 @@ class Profile extends Component {
         <p className='profile-hobbies'>My hobbies: <br /> {this.props.usersData.hobbies}</p> 
       </div>
     );
-  }
+  } 
 }
 
 export default Profile;

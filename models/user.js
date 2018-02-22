@@ -11,7 +11,7 @@ user.create = function(req, res, next) {
   const userInfo = req.body;
   const passwordDigest = bcrypt.hashSync(userInfo.password, 10);
   db.one(
-    'INSERT INTO users (username, password_digest) VALUES ($1, $2) RETURNING *;', [userInfo.username, passwordDigest, 0]
+    'INSERT INTO users (profile_avatar, hobbies, username, password_digest) VALUES ($1, $2, $3, $4) RETURNING *;', [null, null, userInfo.username, passwordDigest, 0]
   ).then(data => {
     // remove the password_digest since it's sensitive
     const { password_digest, ...userData } = data;
@@ -106,7 +106,7 @@ user.editUser = (req, res, next) => {
   db
     .one(
       'UPDATE users SET profile_avatar = $1, hobbies = $2 WHERE id = $3 RETURNING *;',
-      [req.body.profile_avatar, req.body.hobbies, req.params.id]
+      [req.body.profile_avatar, req.body.hobbies, req.body.id]
     )
     .then(data => {
       res.locals.user = data;
