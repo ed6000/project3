@@ -31,11 +31,7 @@ export default class Home extends Component {
     return (
       <div>
         <Logo />
-        <header>
-          <h1>Welcome to PlanIT!</h1>
-        </header>
-        <br />
-        <h2>Login here:</h2> <br />
+        <h2>Login here:</h2>
         <form class='login' onSubmit={this.handleSubmit}>
         <label>Username:
           <p><input
@@ -59,7 +55,7 @@ export default class Home extends Component {
       </form>
         <br />
         <h3>Don't have an account? <Link to='/newuser'> Register here! </Link> </h3>
-        <br /><br />
+      <br />
       <footer>
         <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
       </footer>
