@@ -105,8 +105,6 @@ h1 {
 
 .login{
   max-width: 50vw;
-  width: 500px;
-  height: 200px;
   background: #D8D5D5;
   margin: 0 auto;
   border-style: double;
@@ -138,11 +136,18 @@ input[type="submit"] {
   font-size: 20px;
 }
 
-
 .homebtn {
   font-size: 1.3em;
   color:  white;
   background-color: black;
   border-radius: 2em;
   padding: .5em;
+}
+
+.navbar {
+  color: white;
+  margin: 0 auto;
+  background: black;
+  word-spacing: 0vw;
+  font-size: 2vw;
 }
