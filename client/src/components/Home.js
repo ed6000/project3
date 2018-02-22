@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Logo from "./Logo";
 
 export default class Home extends Component {
 
@@ -29,41 +31,18 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <header>
-          <h1>Welcome to PlanIt!</h1>
-        </header>
-        <h3>Login here:</h3>
-        <form onSubmit={this.handleSubmit}>
-        <label>Name
-          <input 
-            type="text" 
-            name="username" 
-            onChange={this.handleChange}
-            value={this.state.username} />
-        </label>
-        <label>Password
-          <input 
-            type="password" 
-            name="password" 
-            onChange={this.handleChange}
-            value={this.state.password} />
-        </label>
-        <button type="submit" value="Submit">Submit</button>
-      </form>
-        <h4>Don't have an account? <Link to='/newuser'> Register here! </Link> </h4>
-        <section className='homepage-text'>
-          <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-        </section>
-        <footer>
-          <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
-        </footer>
+       <header><h1>Welcome to PlanIT</h1><br /><Logo /></header>
+        <div className="login">
+          <h2 className="h2login">Login:</h2>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+            <input type="text" value={this.state.username} name="username" placeholder="Login" onChange={this.handleChange}/><br />
+            <input type="password" value={this.state.password} name="password" placeholder="Password" onChange={this.handleChange}/><br />
+            <input type="submit" value="Login"/>
+            </label>
+          </form>
+          <h4>Don't have an account? <Link to='/newuser'> Register here! </Link> </h4>
+        </div>
       </div>
     )
   }

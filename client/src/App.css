@@ -39,6 +39,7 @@ body {
   background-color: white;
 }
 
+<<<<<<< HEAD
 #logo {
   position: fixed;
 }
@@ -95,4 +96,62 @@ body {
   grid-row: 2 / span 2;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Antic+Didone');
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Lato', sans-serif;
+  color: #ca1616;
+}
+    
+body{
+  background: #fcf7a1;
+}
+    
+header {
+  font-size: 30px;
+  text-align: center;
+  margin: 20px 0px 20px;
+}
+
+h1 {
+  display: inline-block;
+}
+
+.login{
+  width: 500px;
+  height: 200px;
+  background: #D8D5D5;
+  margin: 0 auto;
+  border: dashed thin;
+  border-radius: 40px;
+  padding: 28px 0px 0px 40px;
+}
+
+.login:hover{
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transform: translate(-4px, -4px);
+  transition: 1s;
+}
+
+input {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+input[type="submit"]:nth-child(5){
+  width: 150px;
+  padding: 6px 12px;
+  font-size: 20px;
+}
+
+.h2login{
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 498px;
+}
 
