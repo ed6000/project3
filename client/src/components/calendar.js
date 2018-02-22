@@ -12,7 +12,7 @@ BigCalendar.momentLocalizer(moment);
 export default class Calendar extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       dataLoaded: this.props.dataLoaded,
       events: this.props.eventsData
     };
@@ -70,8 +70,8 @@ export default class Calendar extends Component {
     );
     if (this.state.dataLoaded === true) {
       return <div className="calendar-container">{MyCalendar()}</div>
-    } else { 
+    } else {
       return <div>LOADING EVENTS...</div>
-       } 
+       }
   }
 }
