@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Antic+Didone');
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /** {
   margin: 0px;
   padding: 0px;
@@ -9,9 +10,11 @@
 */
 =======
 >>>>>>> d0f5ee94a173d50bf07ecdecc8ad4fc00c4bf7ce
+=======
+>>>>>>> 6f3a545da1ab8dd03d899ddd72dd5844091161bb
 body {
   font-family: 'Fira Sans', sans-serif;
-  font-size: 1.5vw;
+  font-size: 1.2vw;
   background: #fcf7a1;
   font-family: 'Lato', sans-serif;
   background-color: #fcf7a1;
@@ -19,7 +22,6 @@ body {
 
 .App {
   text-align: center;
-  height: 100vh;
 }
 
 .calendar-container {
@@ -96,6 +98,7 @@ body {
   font-size: .5em;
   grid-row: 2 / span 2;
 }
+<<<<<<< HEAD
 
 header {
   font-size: 30px;
@@ -106,6 +109,8 @@ header {
 h1 {
   display: inline-block;
 }
+=======
+>>>>>>> 6f3a545da1ab8dd03d899ddd72dd5844091161bb
 
 .login{
   max-width: 50vw;
@@ -113,9 +118,14 @@ h1 {
   margin: 0 auto;
   border-style: double;
   border-radius: 40px;
+<<<<<<< HEAD
   padding-top: 1em;
   padding-bottom: 1em;
   margin: 0 auto;
+=======
+  padding-top: .5em;
+  padding-bottom: .5em;
+>>>>>>> 6f3a545da1ab8dd03d899ddd72dd5844091161bb
 }
 
 .login:hover{
@@ -130,13 +140,13 @@ input {
 }
 
 .logo {
-  width: 27em;
+  padding-top: .5em;
+  width: 22em;
   height: auto;
-  padding: 2em;
 }
 
 .homebtn {
-  font-size: 1.3em;
+  font-size: 1em;
   color:  white;
   background-color: black;
   border-radius: 2em;
