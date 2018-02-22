@@ -75,7 +75,7 @@ export default class AddEvent extends Component {
   }
 
   showRestaurant(e) {
-    e.preventDefault;
+    e.preventDefault();
     this.setState(prevState => {
       prevState.showRestaurant = !prevState.showRestaurant;
       return prevState;
@@ -83,7 +83,7 @@ export default class AddEvent extends Component {
   }
 
   showBooks(e) {
-    e.preventDefault;
+    e.preventDefault();
     this.setState(prevState => {
       prevState.showBooks = !prevState.showBooks;
       return prevState;
@@ -91,7 +91,7 @@ export default class AddEvent extends Component {
   }
 
   showTickets(e) {
-    e.preventDefault;
+    e.preventDefault();
     this.setState(prevState => {
       prevState.showTickets = !prevState.showTickets;
       return prevState;

@@ -6,7 +6,6 @@ export default class EditEvent extends Component {
       this.state = {
         yelpDatum: 10001,
         showRestaurant: false,
-        title: "",
         start: this.props.event.start,
         end_time: this.props.event.end,
         title: this.props.event.title,
@@ -64,7 +63,7 @@ export default class EditEvent extends Component {
   }
 
   showRestaurant(e) {
-    e.preventDefault;
+    e.preventDefault();
     this.setState(prevState => {
       prevState.showRestaurant = !prevState.showRestaurant;
       return prevState;

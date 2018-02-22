@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 import EditProfile from "./EditProfile";
 
-import axios from "axios";
 
 class Profile extends Component {
   constructor(props) {
@@ -37,7 +35,7 @@ class Profile extends Component {
     return (
       <div>
       <div>
-        <p><img height={100} width={100} src={this.props.usersData.profile_avatar}/></p>
+        <p><img alt='profile_avatar' height={100} width={100} src={this.props.usersData.profile_avatar}/></p>
         <h1>Welcome to your profile page {this.props.usersData.username}</h1>
         <p>{this.props.usersData.hobbies}</p>  
         {checkProfileEdit} 

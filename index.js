@@ -13,24 +13,17 @@ app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
-app.use(
-  session({
-    secret: 'keyboard cat',
-    resave: true,
-    saveUninitialized: true,
-  })
-);
+
+
 
 app.use(cors());
+const tokenService = require('./services/TokenService');
+const authService = require('./services/AuthService');
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true  }));
 app.use(bodyParser.json());
-
-const auth = require('./services/auth.js');
-app.use(auth.passportInstance);
-app.use(auth.passportSession);
-
 app.use(morgan('dev'));
+
 
 app.use(cookieParser());
 

@@ -34,10 +34,11 @@ events.findById = (req, res, next) => {
 };
 
 events.addEvent = (req, res, next) => {
+  console.log('req.body is ', req.body);
   db
     .one(
       'INSERT INTO events (user_id, title, start, end_time) VALUES ($1, $2, $3, $4) RETURNING *;',
-      [1, req.body.title, req.body.start, req.body.end_time]
+      [req.body.id, req.body.title, req.body.start, req.body.end_time]
     )
     .then(data => {
       res.locals.event = data;

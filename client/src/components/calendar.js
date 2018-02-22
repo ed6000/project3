@@ -3,10 +3,9 @@ import BigCalendar from 'react-big-calendar';
 import '../../node_modules/react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment';
 import '../App.css';
-import AddEvent from './AddEvent';
+
 
 BigCalendar.momentLocalizer(moment);
-const allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k])
 
 
 export default class Calendar extends Component {

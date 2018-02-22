@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import NewUser from "./components/NewUser";
 import Home from "./components/Home";
 import Profile from "./components/Profile";
 import AddEvent from "./components/AddEvent";
 import EditEvent from "./components/EditEvent";
-import EditProfile from "./components/EditEvent";
 import Calendar from "./components/calendar.js";
+import TokenService from './services/TokenService';
 import "./App.css";
 
 class App extends Component {
@@ -23,13 +23,13 @@ class App extends Component {
       dataLoaded: false,
       book: [],
       slot: {},
-      event: {}
+      event: {},
+      user: {}
     };
 
     console.log(this.state);
 
     this.queryYelp = this.queryYelp.bind(this);
-    this.queryUser = this.queryUser.bind(this);
     this.queryEvents = this.queryEvents.bind(this);
     this.toggleData = this.toggleData.bind(this);
     this.selectSlot = this.selectSlot.bind(this);
@@ -39,6 +39,36 @@ class App extends Component {
     this.deleteEvent = this.deleteEvent.bind(this);
     this.queryBooks = this.queryBooks.bind(this);
     this.queryTicket = this.queryTicket.bind(this);
+    this.register = this.register.bind(this);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+
+  register(data) {
+    axios('http://localhost:8080/users/', {
+      method: "POST",
+      data
+    }).then(resp => {
+      TokenService.save(resp.data.token)
+    })
+    .catch(err => console.log(`err: ${err}`));
+  }
+
+  login(data) {
+    axios('http://localhost:8080/users/login', {
+      method: "POST",
+      data
+    }).then(resp => {
+      TokenService.save(resp.data.token);
+      this.setState({ user: resp.data.user})
+      console.log('this.state.user is ', this.state.user)
+    })
+    .catch(err => console.log(`err: ${err}`));
+  }
+
+  logout(ev) {
+    ev.preventDefault();
+    TokenService.destroy();
   }
 
   toggleData() {
@@ -49,19 +79,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.queryYelp(this.state);
-    this.queryTicket(this.state);
-    this.queryUser();
-    this.queryEvents();
-    const sample = { keyword: 'magic'};
-    this.queryBooks(sample);
+    console.log('app mounted');
+    this.setState({ dataLoaded: true });
   }
 
   queryEvents() {
     this.setState({ dataLoaded: false });
     axios({
       url: "http://localhost:8080/events",
-      method: "get"
+      method: "get",
+      headers: {
+        Authorization: `Bearer ${TokenService.read()}`,
+      },
     }).then(response => {
       this.setState({ events: response.data, dataLoaded: true });
     });
@@ -110,7 +139,10 @@ class App extends Component {
     axios({
       url: "http://localhost:8080/events",
       method: "post",
-      data
+      data,
+      headers: {
+        Authorization: `Bearer ${TokenService.read()}`,
+      },
     }).then(response => {
       this.setState(prevState => {
         prevState.events = prevState.events.concat(response.data);
@@ -129,7 +161,10 @@ class App extends Component {
     axios({
       url: `http://localhost:8080/events/${data.id}`,
       method: "put",
-      data
+      data,
+      headers: {
+        Authorization: `Bearer ${TokenService.read()}`,
+      },
     }).then(response => {
       this.setState(prevState => {
         prevState.events = prevState.events.concat(response.data);
@@ -143,7 +178,10 @@ class App extends Component {
     this.setState({ dataLoaded: false });
     axios({
       url: `http://localhost:8080/events/${data.id}`,
-      method: "delete"
+      method: "delete",
+      headers: {
+        Authorization: `Bearer ${TokenService.read()}`,
+      },
     }).then(response => {
       this.setState(prevState => {
         prevState.events = prevState.events.concat(response.data);
@@ -153,23 +191,20 @@ class App extends Component {
     });
   }
 
-  queryUser() {
-    axios({
-      url: "http://localhost:8080/users/1",
-      method: "get"
-    }).then(response => {
-      this.setState({ usersData: response.data });
-    });
-  }
-
   render() {
     if (this.state.dataLoaded === true) {
       return (
         <BrowserRouter>
           <div className="App">
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/newuser" component={NewUser} />
+              <Route exact path="/" render={props => {
+                return (<Home {...props} submit={this.login} />)
+                }}
+                />
+              <Route exact path="/newuser" render={props => {
+                return (<NewUser {...props} submit={this.register} />)
+              }}
+                />
               <Route
                 exact
                 path="/calendar"
@@ -195,6 +230,7 @@ class App extends Component {
                       {...props}
                       usersData={this.state.usersData}
                       queryUser={this.queryUser}
+                      logout={this.logout}
                     />
                   );
                 }}

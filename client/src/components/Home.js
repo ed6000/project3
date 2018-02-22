@@ -1,35 +1,29 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default class Home extends Component {
 
   constructor(props) {
     super(props);
-    this.state =
-    {username: '', password: ''};
-    this.queryUsers = this.queryUsers.bind(this);
+    this.state = {
+      username: '',
+      password: ''
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  queryUsers() {
-    axios.get('') //make a call to users in the DB
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    }
-
-  handleChange(event) {
-    this.setState({username: event.target.username, password: event.target.password});
+  handleChange(e) {
+    const { name, value } = e.target
+    this.setState({
+      [name]: value
+    });
   }
 
-  handleSubmit(event) {
-    alert(`The username: ${this.state.username} was submitted.`);
-    event.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.submit(this.state);
+    this.props.history.push('/calendar');
   }
 
   render() {
@@ -39,17 +33,24 @@ export default class Home extends Component {
           <h1>Welcome to PlanIt!</h1>
         </header>
         <h3>Login here:</h3>
-
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Username: <input type='text' value={this.state.username} placeholder='Enter username' onChange={this.handleChange} /> <br></br>
-            Password: <input type='text' value={this.state.password} placeholder='Enter password' onChange={this.handleChange} /><br></br>
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-
+        <label>Name
+          <input 
+            type="text" 
+            name="username" 
+            onChange={this.handleChange}
+            value={this.state.username} />
+        </label>
+        <label>Password
+          <input 
+            type="password" 
+            name="password" 
+            onChange={this.handleChange}
+            value={this.state.password} />
+        </label>
+        <button type="submit" value="Submit">Submit</button>
+      </form>
         <h4>Don't have an account? <Link to='/newuser'> Register here! </Link> </h4>
-
         <section className='homepage-text'>
           <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -60,7 +61,6 @@ export default class Home extends Component {
           non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </section>
-
         <footer>
           <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
         </footer>
