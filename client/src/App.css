@@ -90,7 +90,9 @@ body {
 
 .login{
   max-width: 50vw;
-  background: #D8D5D5;
+ /* background: #D8D5D5;*/
+  background-color: #CF512F;
+  opacity: .7;
   margin: 0 auto;
   border-style: double;
   border-radius: 40px;
