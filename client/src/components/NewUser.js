@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Logo from "./Logo";
 
 export default class Home extends Component {
 
@@ -28,11 +29,13 @@ export default class Home extends Component {
 
   render() {
     return (
+      <BrowserRouter>
       <div>
         <header>
           <h1>Welcome to PlanIt!</h1>
         </header>
-        <h3>Create an accout!</h3>
+        <Logo />
+        <h3>Register Here:</h3>
         <form onSubmit={this.handleSubmit}>
         <label>Name
           <input 
@@ -54,6 +57,7 @@ export default class Home extends Component {
           <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
         </footer>
       </div>
+      </BrowserRouter>
     )
   }
 }

@@ -33,18 +33,16 @@ class Profile extends Component {
     }
 
     return (
-      <div>
-      <div>
-        <p><img alt='profile_avatar' height={100} width={100} src={this.props.usersData.profile_avatar}/></p>
-        <h1>Welcome to your profile page {this.props.usersData.username}</h1>
-        <p>{this.props.usersData.hobbies}</p>  
-        {checkProfileEdit} 
-      </div>
-      <br/>
-      <br/>
-      <button className="edit" onClick={this.editProfile}>
-          Edit Profile
-        </button>
+      <div className='grid-container'>
+      
+        <p className='profile-img'><img className='avatar' src={this.props.usersData.profile_avatar} /></p>
+        <h1 className='profile-welcome-form'><div className='welcome-msg'>Welcome to your profile {this.props.usersData.username}</div>
+          <button className='profile-button' onClick={this.editProfile}>
+            Edit Profile
+          </button>
+          {checkProfileEdit}
+        </h1>
+        <p className='profile-hobbies'>My hobbies: <br /> {this.props.usersData.hobbies}</p> 
       </div>
     );
   }

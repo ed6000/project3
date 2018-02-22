@@ -192,6 +192,10 @@ class App extends Component {
   }
 
   render() {
+    const styles = 
+    { backgroundColor: 'white',
+    height: '100vh',
+    width: '100vw'};
     if (this.state.dataLoaded === true) {
       return (
         <BrowserRouter>
@@ -279,7 +283,8 @@ class App extends Component {
         </BrowserRouter>
       );
     }
-    return <div>LOADING...</div>;
+    // return <div>LOADING...</div>;
+     return <div style={styles}><img className='loading' src={'./images/animated_loading.gif'} /></div>
   }
 }
 

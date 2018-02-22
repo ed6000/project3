@@ -112,6 +112,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             placeholder='Enter your event' />
         </label><br />
+        <br />
         <label>From
           <input 
             type='text' 
@@ -119,6 +120,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             value={this.props.slot.start} />
         </label><br />
+        <br />
         <label>To
           <input 
             type='text' 
@@ -126,9 +128,11 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             value={this.props.slot.end} />
         </label><br />
+        <br />
         <button type='submit'>Add Event</button>
         </form>
-        <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
+        <br />
+        <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
         <input type='button' onClick={this.showTickets} value='Search for tickets' />
         <form onSubmit={this.submitYelp}>
@@ -164,6 +168,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             placeholder='Enter your event' />
         </label><br />
+        <br />
         <label>From
           <input 
             type='text' 
@@ -171,6 +176,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             value={this.props.slot.start} />
         </label><br />
+        <br />
         <label>To
           <input 
             type='text' 
@@ -178,9 +184,11 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             value={this.props.slot.end} />
         </label><br />
+        <br />
         <button type='submit'>Add Event</button>
         </form>
-        <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
+        <br />
+        <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
         <input type='button' onClick={this.showTickets} value='Search for tickets' />
         <form onSubmit={this.submitBook}>
@@ -215,6 +223,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             placeholder='Enter your event' />
         </label><br />
+        <br />
         <label>From
           <input 
             type='text' 
@@ -222,6 +231,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             value={this.props.slot.start} />
         </label><br />
+        <br />
         <label>To
           <input 
             type='text' 
@@ -229,9 +239,11 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             value={this.props.slot.end} />
         </label><br />
+        <br />
         <button type='submit'>Add Event</button>
         </form>
-          <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
+        <br />
+          <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
           <input type='button' onClick={this.showBooks} value='Search for books' />
           <input type='button' onClick={this.showTickets} value='Search for tickets' />
           <form onSubmit={this.submitTicket}>
@@ -267,6 +279,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             placeholder='Enter your event' />
         </label><br />
+        <br />
         <label>From
           <input 
             type='text' 
@@ -274,6 +287,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             value={this.props.slot.start} />
         </label><br />
+        <br />
         <label>To
           <input 
             type='text' 
@@ -281,9 +295,12 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             value={this.props.slot.end} />
         </label><br />
+        <br />
         <button type='submit'>Add Event</button>
+        <br />
+        <br />
         </form>
-        <input type='button' onClick={this.showRestaurant} value='Search for restaurants by zip code' />
+        <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
         <input type='button' onClick={this.showTickets} value='Search for tickets' />
         </div>

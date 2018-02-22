@@ -46,7 +46,7 @@ export default class Calendar extends Component {
         </h3>
         <div className='calendar-gridcontainer'>
         <div className='calendar-container'>
-        <BigCalendar
+        <BigCalendar className='calendar'
           selectable
           events={events}
           defaultView="month"
