@@ -26,6 +26,7 @@ body {
 .stars_bg {
     background-image: url('./images/bg-image.jpg');
     background-size: cover;
+    height: 100vh;
 }
 .calendar-container {
   grid-column: 2 / span 1;
