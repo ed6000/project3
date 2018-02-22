@@ -32,7 +32,7 @@ export default class Home extends Component {
       <div>
         <Logo />
         <header>
-          <h1>Welcome to PlanIt!</h1>
+          <h1>Welcome to PlanIT!</h1>
         </header>
         <br />
         <h2>Login here:</h2> <br />

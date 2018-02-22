@@ -1,17 +1,22 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Antic+Didone');
 
-* {
-  margin: 0 auto;
-  padding: 0;
+/** {
+  margin: 0px;
+  padding: 0px;
 }
-
+*/
 body {
-  background-color: #fcf7a1;
   font-family: 'Fira Sans', sans-serif;
   font-size: 1.5vw;
-  color: darkred;
+  background: #fcf7a1;
+  font-family: 'Lato', sans-serif;
+  background-color: #fcf7a1;
+}
+
+.App {
+  text-align: center;
+  height: 100vh;
 }
 
 .calendar-container {
@@ -23,7 +28,10 @@ body {
   grid-template-rows: 7fr 1fr;
   grid-template-columns: 1fr 15fr 1fr;
 }
-
+.stars_bg {
+    background-image: url('./images/bg-image.jpg');
+    background-size: cover;
+}
 .calendar-container {
   grid-column: 2 / span 1;
   grid-row: 1 / span 1;
@@ -31,6 +39,11 @@ body {
 
 .calendar {
   background-color: white;
+}
+
+.loading {
+  padding-left: 35vw;
+  padding-top: 20vh;
 }
 
 .profile-input {
@@ -79,11 +92,24 @@ body {
   font-size: .5em;
   grid-row: 2 / span 2;
 }
+    
+header {
+  font-size: 30px;
+  text-align: center;
+  margin: 20px 0px 20px;
+}
+
+h1 {
+  display: inline-block;
+}
 
 .login{
-  background: lightgray;
   max-width: 50vw;
-  border: thin;
+  width: 500px;
+  height: 200px;
+  background: #D8D5D5;
+  margin: 0 auto;
+  border-style: double;
   border-radius: 40px;
   padding-top: 1em;
   padding-bottom: 1em;
@@ -93,6 +119,7 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   transform: translate(-4px, -4px);
   transition: 1s;
+  border-color: red;
 }
 
 input {
@@ -103,6 +130,12 @@ input {
   width: 27em;
   height: auto;
   padding: 2em;
+}
+
+input[type="submit"] {
+  width: 150px;
+  padding: 6px 12px;
+  font-size: 20px;
 }
 
 
