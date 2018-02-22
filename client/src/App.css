@@ -92,7 +92,7 @@ body {
   font-size: .5em;
   grid-row: 2 / span 2;
 }
-    
+
 header {
   font-size: 30px;
   text-align: center;
@@ -105,8 +105,7 @@ h1 {
 
 .login{
   max-width: 50vw;
-  width: 500px;
-  height: 200px;
+
   background: #D8D5D5;
   margin: 0 auto;
   border-style: double;
@@ -130,12 +129,6 @@ input {
   width: 27em;
   height: auto;
   padding: 2em;
-}
-
-input[type="submit"] {
-  width: 150px;
-  padding: 6px 12px;
-  font-size: 20px;
 }
 
 
