@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from "./Logo";
+import Footer from "./Footer";
 
 export default class Home extends Component {
 
@@ -32,7 +33,7 @@ export default class Home extends Component {
       <div>
         <Logo />
         <h2>Login here:</h2>
-        <form class='login' onSubmit={this.handleSubmit}>
+        <form className='login' onSubmit={this.handleSubmit}>
         <label>Username:
           <p><input
             placeholder='Enter your username'
@@ -57,7 +58,7 @@ export default class Home extends Component {
         <h3>Don't have an account? <Link to='/newuser'> Register here! </Link> </h3>
       <br />
       <footer>
-        <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
+        <Footer />
       </footer>
     </div>
   )}}

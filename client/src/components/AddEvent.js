@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import NavBar from './NavBar'; 
+=======
+import NavBar from './NavBar';
+import Footer from './Footer';
+>>>>>>> 1e62e238ec05f22aad15439763527f40d04b12d6
 
 export default class AddEvent extends Component {
   constructor(props) {
@@ -415,6 +420,9 @@ export default class AddEvent extends Component {
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
         <input type='button' onClick={this.showTickets} value='Search for activities' />
+        <footer>
+          <Footer />
+        </footer>
         </div>
         )
   }

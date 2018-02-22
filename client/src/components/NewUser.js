@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import Logo from "./Logo";
+import Footer from "./Footer";
 
 export default class Home extends Component {
 
@@ -57,7 +58,7 @@ export default class Home extends Component {
         <h3>Already have an account? <Link to='/'> Login here! </Link> </h3>
       <br />
       <footer>
-        <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
+        <Footer />
       </footer>
     </div>
   )}}

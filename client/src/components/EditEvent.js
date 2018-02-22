@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar'; 
+import NavBar from './NavBar';
+import Footer from './Footer';
 
 export default class EditEvent extends Component {
   constructor(props) {
@@ -422,6 +423,9 @@ export default class EditEvent extends Component {
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
         <input type='button' onClick={this.showTickets} value='Search for activities' />
+        <footer>
+          <Footer />
+        </footer>
         </div>
         )
   }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -63,13 +64,14 @@ class EditProfile extends Component {
           <br />
           <br />
           <textarea
+            className='edit-profile-text-area'
             type="text"
             name="hobbies"
             onChange={this.changeHandler}
             value={this.state.hobbies}
           />
           <br />
-          <input type="submit" value="submit" />
+          <input className='edit-button-submit' type="submit" value="submit" />
         </form>
       </div>
     );
