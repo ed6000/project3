@@ -36,7 +36,7 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-<header><h1>Welcome to PlanIT</h1><Logo /></header>
+<header><h1>Welcome to PlanIT</h1><br /><Logo /></header>
 <div className="login">
   <h2 className="h2login">Login:</h2>
   <form onSubmit={this.handleSubmit}>

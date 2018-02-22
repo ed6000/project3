@@ -61,7 +61,7 @@
     .login:hover{
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       transform: translate(-4px, -4px);
-      transition: 2s;
+      transition: 1s;
     }
     input {
       font-size: 20px;
@@ -75,4 +75,7 @@
     }
     .h2login{
       margin-bottom: 20px;
+    }
+    .logo {
+      width: 498px;
     }
