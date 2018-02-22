@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import Footer from './Footer';
 
 export default class EditEvent extends Component {
   constructor(props) {
@@ -130,6 +131,9 @@ export default class EditEvent extends Component {
         <input type='button' onClick={this.delete} value='Delete event' />
         </form>
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
+        <footer>
+          <Footer />
+        </footer>
         </div>
         )
   }

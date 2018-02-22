@@ -5,7 +5,7 @@ import '../../node_modules/react-big-calendar/lib/css/react-big-calendar.css'
 import moment from 'moment';
 import '../App.css';
 import NavBar from './NavBar';
-
+import Footer from './Footer';
 
 BigCalendar.momentLocalizer(moment);
 

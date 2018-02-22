@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import EditProfile from "./EditProfile";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 class Profile extends Component {
   constructor(props) {
@@ -53,8 +54,12 @@ class Profile extends Component {
           {checkProfileEdit}
         </h1>
         <p className='profile-hobbies'>My hobbies: <br /> {this.props.usersData.hobbies}</p> 
-        <input className='profile-button' type='button' value='Logout' onClick={this.logout} />
+        
       </div>
+      <input className='profile-button' type='button' value='Logout' onClick={this.logout} />
+      <footer>
+        <Footer />
+      </footer>
       </div>
     );
   } 

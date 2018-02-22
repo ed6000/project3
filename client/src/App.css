@@ -123,10 +123,36 @@ input {
   padding: .5em;
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .navbar {
   color: white;
   margin: 0 auto;
   background: black;
-  word-spacing: 0vw;
+  word-spacing: 4vw;
   font-size: 2vw;
+  font-family: 'Antic Didone', serif;
+}
+
+.navbar > a {
+  color: white;
+  text-decoration: white;
+}
+
+.edit-profile-text-area {
+  font-size: 1.5em;
+}
+
+.edit-button-submit {
+  font-size: 1vw;
+  padding: 1vw;
+  border-radius: 20%;
+}
+
+.social-media-footer > img {
+  max-width: 4vw;
+  max-height: 4vw;
 }
