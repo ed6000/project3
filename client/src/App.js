@@ -294,6 +294,11 @@ class App extends Component {
                       editEvent={this.editEvent}
                       deleteEvent={this.deleteEvent}
                       queryEvents={this.queryEvents}
+                      book={this.state.book}
+                      ticketData={this.state.ticketData}
+                      queryTicket={this.queryTicket}
+                      queryEvents={this.queryEvents}
+                      queryBooks={this.queryBooks}
                     />
                   );
                 }}
