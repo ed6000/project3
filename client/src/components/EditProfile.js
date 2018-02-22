@@ -37,6 +37,7 @@ class EditProfile extends Component {
     }).then(response => {
       console.log("PUT successful, response.data:", response.data);
       this.props.queryUser(this.props.usersData.id);
+      this.props.editProfile();
     });
   }
 

@@ -84,8 +84,7 @@ class App extends Component {
     .catch(err => console.log(`err: ${err}`));
   }
 
-  logout(ev) {
-    ev.preventDefault();
+  logout() {
     TokenService.destroy();
   }
 

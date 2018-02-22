@@ -10,18 +10,23 @@ class Profile extends Component {
     };
     
     this.editProfile = this.editProfile.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
     console.log('this.props.usersData', this.props.usersData);
   }
 
-  editProfile(e) {
-    e.preventDefault();
+  editProfile() {
     this.setState(prevState => {
       const nextState = { ...prevState, editing: !prevState.editing };
       return nextState;
     });
+  }
+
+  logout() {
+    this.props.logout();
+    this.props.history.push('/');
   }
 
   render() {
@@ -32,6 +37,7 @@ class Profile extends Component {
         <EditProfile
           queryUser={this.props.queryUser}
           usersData={this.props.usersData}
+          editProfile={this.editProfile}
         />
       );
     } return (
@@ -45,6 +51,7 @@ class Profile extends Component {
           {checkProfileEdit}
         </h1>
         <p className='profile-hobbies'>My hobbies: <br /> {this.props.usersData.hobbies}</p> 
+        <input className='profile-button' type='button' value='Logout' onClick={this.logout} />
       </div>
     );
   } 
