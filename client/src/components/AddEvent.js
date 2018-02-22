@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import NavBar from './NavBar'; 
-=======
 import NavBar from './NavBar';
 import Footer from './Footer';
->>>>>>> 1e62e238ec05f22aad15439763527f40d04b12d6
 
 export default class AddEvent extends Component {
   constructor(props) {
