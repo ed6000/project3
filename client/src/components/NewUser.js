@@ -29,35 +29,39 @@ export default class Home extends Component {
 
   render() {
     return (
-      <BrowserRouter>
       <div>
+        <Logo />
         <header>
           <h1>Welcome to PlanIt!</h1>
         </header>
-        <Logo />
-        <h3>Register Here:</h3>
-        <form onSubmit={this.handleSubmit}>
-        <label>Name
-          <input 
-            type="text" 
-            name="username" 
+        <br />
+        <h2>Register here:</h2> <br />
+        <form class='login' onSubmit={this.handleSubmit}>
+        <label>Username:
+          <p><input
+            placeholder='Enter your username'
+            type="text"
+            name="username"
             onChange={this.handleChange}
-            value={this.state.username} />
+            value={this.state.username} /></p>
         </label>
-        <label>Password
-          <input 
-            type="password" 
-            name="password" 
+        <br />
+        <label>Password:
+          <p><input
+            placeholder='Enter your password'
+            type="password"
+            name="password"
             onChange={this.handleChange}
-            value={this.state.password} />
+            value={this.state.password} /></p>
         </label>
-        <button type="submit" value="Submit">Submit</button>
+        <br />
+        <button className='homebtn' type="submit" value="Submit">Submit</button>
       </form>
-        <footer>
-          <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
-        </footer>
-      </div>
-      </BrowserRouter>
-    )
-  }
-}
+        <br />
+        <h3>Already have an account? <Link to='/'> Login here! </Link> </h3>
+        <br /><br />
+      <footer>
+        <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
+      </footer>
+    </div>
+  )}}

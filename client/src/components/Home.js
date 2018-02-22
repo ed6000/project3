@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Logo from "./Logo";
 
 export default class Home extends Component {
@@ -31,19 +30,38 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-       <header><h1>Welcome to PlanIT</h1><br /><Logo /></header>
-        <div className="login">
-          <h2 className="h2login">Login:</h2>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-            <input type="text" value={this.state.username} name="username" placeholder="Login" onChange={this.handleChange}/><br />
-            <input type="password" value={this.state.password} name="password" placeholder="Password" onChange={this.handleChange}/><br />
-            <input type="submit" value="Login"/>
-            </label>
-          </form>
-          <h4>Don't have an account? <Link to='/newuser'> Register here! </Link> </h4>
-        </div>
-      </div>
-    )
-  }
-}
+        <Logo />
+        <header>
+          <h1>Welcome to PlanIt!</h1>
+        </header>
+        <br />
+        <h2>Login here:</h2> <br />
+        <form class='login' onSubmit={this.handleSubmit}>
+        <label>Username:
+          <p><input
+            placeholder='Enter your username'
+            type="text"
+            name="username"
+            onChange={this.handleChange}
+            value={this.state.username} /></p>
+        </label>
+        <br />
+        <label>Password:
+          <p><input
+            placeholder='Enter your password'
+            type="password"
+            name="password"
+            onChange={this.handleChange}
+            value={this.state.password} /></p>
+        </label>
+        <br />
+        <button className='homebtn' type="submit" value="Submit">Submit</button>
+      </form>
+        <br />
+        <h3>Don't have an account? <Link to='/newuser'> Register here! </Link> </h3>
+        <br /><br />
+      <footer>
+        <p>Copyright &#169; 2018 mess @ General Assembly</p><p>All Rights Reserved</p>
+      </footer>
+    </div>
+  )}}
