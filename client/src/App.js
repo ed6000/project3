@@ -255,6 +255,7 @@ class App extends Component {
                       usersData={this.state.userData}
                       logout={this.logout}
                       queryUser={this.queryUser}
+                      changeBackground={this.changeBackground.bind(this)}
                     />
                   );
                 }}

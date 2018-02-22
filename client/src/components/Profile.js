@@ -16,8 +16,15 @@ class Profile extends Component {
 
   componentDidMount() {
     console.log('this.props.usersData', this.props.usersData);
+    const colorData = 'stars_bg';
+    this.props.changeBackground(colorData);
+    console.log('in componentDidMount calendar, colorData is ', colorData);
   }
-
+    
+  
+  componentWillUnmount() {
+    this.props.changeBackground("");
+}
   editProfile() {
     this.setState(prevState => {
       const nextState = { ...prevState, editing: !prevState.editing };
