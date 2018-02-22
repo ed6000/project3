@@ -24,6 +24,9 @@ export default class AddEvent extends Component {
       this.addEvent = this.addEvent.bind(this);
       this.showBooks = this.showBooks.bind(this);
       this.showTickets = this.showTickets.bind(this);
+      this.grabRestaurantinfo = this.grabRestaurantinfo.bind(this);
+      this.grabBookinfo = this.grabBookinfo.bind(this);
+      this.grabActivityinfo = this.grabActivityinfo.bind(this);
     }
 
  resetState() {
@@ -98,6 +101,76 @@ export default class AddEvent extends Component {
     })
   }
 
+  grabRestaurantinfo(e) {
+    e.preventDefault;
+
+    const inputLocation = document.getElementById("yelpinput");
+    const divLocation = document.getElementById("yelpinfo");
+    const nameLocation = e.target.getAttribute("data-name");
+    const addressLocation = e.target.getAttribute("data-address");
+    const phoneLocation = e.target.getAttribute("data-phone");
+    inputLocation.value =
+      nameLocation + "\n" + addressLocation + "\n" + phoneLocation;
+    if (inputLocation != "") {
+      this.setState({
+        [inputLocation.name]: inputLocation.value
+      });
+    }
+  }
+
+  grabBookinfo(e) {
+    e.preventDefault;
+
+    const inputLocation = document.getElementById("bookinput");
+    const divLocation = document.getElementById("bookinfo");
+    const titleLocation = e.target.getAttribute("data-title");
+    const authorLocation = e.target.getAttribute("data-author");
+    inputLocation.value = titleLocation + "\n" + authorLocation;
+    if (inputLocation != "") {
+      this.setState({
+        [inputLocation.name]: inputLocation.value
+      });
+    }
+  }
+
+  grabActivityinfo(e) {
+    e.preventDefault;
+
+    const inputLocation = document.getElementById("activityinput");
+    const fromLocation = document.getElementById("ticketFrom");
+    const toLocation = document.getElementById("ticketTo");
+    const divLocation = document.getElementById("ticketinfo");
+    const titleLocation = e.target.getAttribute("data-title");
+    const nameLocation = e.target.getAttribute("data-name");
+    const addressLocation = e.target.getAttribute("data-address");
+    const dateLocation = e.target.getAttribute("data-date");
+    const startDateLocation = e.target.getAttribute("data-startdate");
+    const startTimeLocation = e.target.getAttribute("data-starttime");
+    const endDateTimeLocation = e.target.getAttribute("data-enddatetime");
+
+    inputLocation.value =
+      titleLocation +
+      "\n" +
+      nameLocation +
+      "\n" +
+      addressLocation +
+      "\n" +
+      startDateLocation;
+
+    fromLocation.value = startDateLocation + " " + startTimeLocation;
+
+    toLocation.value = endDateTimeLocation;
+
+    if (inputLocation != "" || toLocation != "" || fromLocation != "") {
+      this.setState({
+        [inputLocation.name]: inputLocation.value,
+        [fromLocation.name]: fromLocation.value,
+        [toLocation.name]: toLocation.value
+      });
+    }
+  }
+
+
   render() {
 
     if (this.state.showRestaurant === true) {
@@ -106,14 +179,16 @@ export default class AddEvent extends Component {
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event
-          <input 
+          <textarea
+            id="yelpinput"
+            className="eventinfo" 
             type='text' 
             name='title' 
             onChange={this.changeHandler}
             placeholder='Enter your event' />
         </label><br />
         <br />
-        <label>From
+        <label id="from">From
           <input 
             type='text' 
             name='start' 
@@ -134,7 +209,7 @@ export default class AddEvent extends Component {
         <br />
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
-        <input type='button' onClick={this.showTickets} value='Search for tickets' />
+        <input type='button' onClick={this.showTickets} value='Search for activities' />
         <form onSubmit={this.submitYelp}>
         <label>
           <input 
@@ -147,10 +222,19 @@ export default class AddEvent extends Component {
         </form>
           {this.props.yelpData.map(el => {
             return (
-              <div key={el.id}>
+              <div data-solo={el.id} id="yelpinfo" key={el.id}>
                 <p>Name: {el.name}</p>
                 <p>Address: {el.location.address1}</p>
                 <p>Phone: {el.display_phone}</p>
+                <button
+                  data-name={el.name}
+                  data-address={el.location.address1}
+                  data-phone={el.display_phone}
+                  id="movedata"
+                  onClick={this.grabRestaurantinfo}
+                >
+                  Select this Restaurant
+                </button>
               </div>
             );
           })}
@@ -162,11 +246,13 @@ export default class AddEvent extends Component {
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event
-          <input 
-            type='text' 
-            name='title' 
-            onChange={this.changeHandler}
-            placeholder='Enter your event' />
+          <textarea 
+            id="bookinput"
+                className="eventinfo"
+                type="text"
+                name="title"
+                onChange={this.changeHandler}
+                placeholder="Enter your event" />
         </label><br />
         <br />
         <label>From
@@ -190,7 +276,7 @@ export default class AddEvent extends Component {
         <br />
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
-        <input type='button' onClick={this.showTickets} value='Search for tickets' />
+        <input type='button' onClick={this.showTickets} value='Search for activities' />
         <form onSubmit={this.submitBook}>
         <label>
           <input 
@@ -203,10 +289,18 @@ export default class AddEvent extends Component {
         </form>
           <div>{this.props.book.map((el, index) => {
             return (
-              <div key={index}>
-                <p>Book Title: {el.volumeInfo.title}</p>
-                <p>Author: {el.volumeInfo.authors}</p>
-               </div>
+              <div id="bookinfo" key={index}>
+                  <p>Book Title: {el.volumeInfo.title}</p>
+                  <p>Author: {el.volumeInfo.authors}</p>
+                  <button
+                    data-title={el.volumeInfo.title}
+                    data-author={el.volumeInfo.authors}
+                    id="movedata"
+                    onClick={this.grabBookinfo}
+                  >
+                    Select this Book
+                  </button>
+                </div>
             );
           })}</div>
         </div>
@@ -217,27 +311,28 @@ export default class AddEvent extends Component {
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event
-          <input 
-            type='text' 
-            name='title' 
-            onChange={this.changeHandler}
-            placeholder='Enter your event' />
+          <textarea 
+            id="activityinput"
+                type="text"
+                name="title"
+                onChange={this.changeHandler}
+                placeholder="Enter your event"/>
         </label><br />
         <br />
         <label>From
           <input 
-            type='text' 
-            name='start' 
-            onChange={this.changeHandler}
-            value={this.props.slot.start} />
+            id="ticketFrom"
+                type="text"
+                name="start"
+                onChange={this.changeHandler}/>
         </label><br />
         <br />
         <label>To
           <input 
-            type='text' 
-            name='end_time' 
-            onChange={this.changeHandler}
-            value={this.props.slot.end} />
+            id="ticketTo"
+                type="text"
+                name="end_time"
+                onChange={this.changeHandler}/>
         </label><br />
         <br />
         <button type='submit'>Add Event</button>
@@ -245,7 +340,7 @@ export default class AddEvent extends Component {
         <br />
           <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
           <input type='button' onClick={this.showBooks} value='Search for books' />
-          <input type='button' onClick={this.showTickets} value='Search for tickets' />
+          <input type='button' onClick={this.showTickets} value='Search for activities' />
           <form onSubmit={this.submitTicket}>
         <label>
           <input 
@@ -258,12 +353,24 @@ export default class AddEvent extends Component {
         </form>
         <div>{this.props.ticketData.map(el => {
           return (
-            <div key={el.id}>
-              <p>{el.name}</p>
-              <h5>{el._embedded.venues[0].name}</h5>
-              <h6>{el._embedded.venues[0].address.line1}</h6>
-              <h6>{el.dates.start.localDate}</h6>
-            </div>
+            <div id="ticketinfo" key={el.id}>
+                  <p>{el.name}</p>
+                  <h5>{el._embedded.venues[0].name}</h5>
+                  <h6>{el._embedded.venues[0].address.line1}</h6>
+                  <h6>{el.dates.start.localDate}</h6>
+                  <button
+                    data-title={el.name}
+                    data-name={el._embedded.venues[0].name}
+                    data-address={el._embedded.venues[0].address.line1}
+                    data-startdate={el.dates.start.localDate}
+                    data-starttime={el.dates.start.localTime}
+                    data-enddatetime={el.dates.start.dateTime}
+                    id="movedata"
+                    onClick={this.grabActivityinfo}
+                  >
+                    Select this Activity
+                  </button>
+                </div>
           );
         })}</div>
         </div>
@@ -302,7 +409,7 @@ export default class AddEvent extends Component {
         </form>
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
-        <input type='button' onClick={this.showTickets} value='Search for tickets' />
+        <input type='button' onClick={this.showTickets} value='Search for activities' />
         </div>
         )
   }

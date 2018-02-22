@@ -21,6 +21,7 @@ body {
 
 .calendar-container {
   height: 700px;
+  white-space: pre-wrap;
 }
 
 .calendar-gridcontainer {
