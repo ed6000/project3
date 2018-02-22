@@ -32,7 +32,7 @@ router.put('/:id', events.editEvent, (req, res) => {
 });
 
 router.delete('/:id', events.deleteEvent, (req, res) => {
-  res.send('event deleted');
+  res.json(res.locals.event);
 });
 
 module.exports = router;
