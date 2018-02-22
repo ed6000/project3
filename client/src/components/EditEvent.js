@@ -28,6 +28,7 @@ export default class EditEvent extends Component {
   delete(e) {
     e.preventDefault();
     const data = {id: this.state.id};
+    console.log('in editEvent.deleteEvent, data is ', data);
     this.props.deleteEvent(data);
     this.props.queryEvents();
     this.props.history.push('/calendar');

@@ -193,11 +193,7 @@ class App extends Component {
         Authorization: `Bearer ${TokenService.read()}`,
       },
     }).then(response => {
-      this.setState(prevState => {
-        prevState.events = prevState.events.concat(response.data);
-        return prevState;
-      });
-      this.queryEvents();
+        this.queryEvents();
     });
   }
 

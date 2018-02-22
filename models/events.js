@@ -129,11 +129,11 @@ events.editEvent = (req, res, next) => {
 events.deleteEvent = (req, res, next) => {
   db
     .one(
-      'DELETE FROM events WHERE id = $1',
+      'DELETE FROM events WHERE id = $1 RETURNING *',
       [req.params.id]
     )
-    .then(() => {
-      console.log('event deleted');
+    .then(data => {
+      res.locals.event = data;
       next();
     })
     .catch(err => {
