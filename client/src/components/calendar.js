@@ -66,31 +66,28 @@ export default class Calendar extends Component {
     });
     const MyCalendar = props => (
       <React.Fragment>
-        <NavBar />
-        <br />
-        <h3 className="callout">
-          Click an event to see more info, or drag the mouse over the calendar
-          to select a date/time range.
-        </h3>
-        <div className="calendar-gridcontainer">
-          <div className="calendar-container">
-            <BigCalendar
-              className="calendar"
-              selectable
-              events={events}
-              defaultView="month"
-              scrollToTime={new Date(2010, 1, 1, 6)}
-              defaultDate={new Date(2018, 1, 23)}
-              onSelectEvent={event => {
-                if (window.confirm('Edit event?')) {
-                  this.handleEdit(event);
-                } else {
-                  console.log('editing denied');
-                }
-              }}
-              onSelectSlot={slotInfo => this.handleSelect(slotInfo)}
-            />
-          </div>
+      <NavBar />
+      <br />
+      <br />
+        <div className='calendar-gridcontainer'>
+        <div className='calendar-container'>
+        <BigCalendar className='calendar'
+          selectable
+          events={events}
+          defaultView="month"
+          scrollToTime={new Date(2010, 1, 1, 6)}
+          defaultDate={new Date(2018, 1, 23)}
+          onSelectEvent={event => {
+            if (window.confirm("Edit event?")) {
+              this.handleEdit(event);
+            } else {
+               console.log('editing denied');
+            }}}
+          onSelectSlot={slotInfo =>
+            this.handleSelect(slotInfo)
+          }
+        />
+        </div>
         </div>
         <footer>
           <Footer />

@@ -194,72 +194,56 @@ export default class EditEvent extends Component {
     if (this.state.showRestaurant === true) {
       return (
         <div>
-          <NavBar />
-          <br />
-          <h1>Edit an Event!</h1>
+         <NavBar />
+         <br />
+        <h1>Edit an Event!</h1>
+        <div className='add-event-div'>
           <form onSubmit={this.editEvent}>
-            <label>
-              Event
-              <textarea
-                id="yelpinput"
-                className="eventinfo"
-                type="text"
-                name="title"
-                onChange={this.changeHandler}
-                placeholder="Enter your event"
-              />
-            </label>
-            <br />
-            <label>
-              From
-              <input
-                type="text"
-                name="start"
-                onChange={this.changeHandler}
-                value={this.props.event.start}
-              />
-            </label>
-            <br />
-            <label>
-              To
-              <input
-                type="text"
-                name="end_time"
-                onChange={this.changeHandler}
-                value={this.props.event.end}
-              />
-            </label>
-            <br />
-            <button type="submit">Edit Event</button>
-            <input type="button" onClick={this.delete} value="Delete event" />
-          </form>
+          <p>Event</p>
+          <label>
+            <textarea
+              id="yelpinput"
+              className="eventinfo" 
+              type='text' 
+              name='title' 
+              onChange={this.changeHandler}
+              placeholder='Enter your event' />
+          </label><br />
+          <p>From</p>
+          <label>
+            <input 
+              type='text' 
+              name='start' 
+              onChange={this.changeHandler}
+              value={this.props.event.start} />
+          </label><br />
+          <p>To</p>
+          <label>
+            <input 
+              type='text' 
+              name='end_time' 
+              onChange={this.changeHandler}
+              value={this.props.event.end} />
+          </label><br />
           <br />
-          <input
-            type="button"
-            onClick={this.showRestaurant}
-            value="Search for restaurants"
-          />
-          <input
-            type="button"
-            onClick={this.showBooks}
-            value="Search for books"
-          />
-          <input
-            type="button"
-            onClick={this.showTickets}
-            value="Search for activities"
-          />
-          <form onSubmit={this.submitYelp}>
-            <label>
-              <input
-                type="text"
-                name="yelpDatum"
-                onChange={this.changeHandler}
-                placeholder="Enter your zip code"
-              />
-            </label>
-            <button type="submit">Search</button>
+          <button className='add-event-button' type='submit'>Edit Event</button>
+          <input className='add-event-button' type='button' onClick={this.delete} value='Delete event' />
           </form>
+        </div>
+        <br />
+        <input className='add-event-button' type='button' onClick={this.showRestaurant} value='Search for restaurants' />
+        <input className='add-event-button' type='button' onClick={this.showBooks} value='Search for books' />
+        <input className='add-event-button' type='button' onClick={this.showTickets} value='Search for activities' />
+        <form onSubmit={this.submitYelp}>
+        <label>
+          <input 
+            type='text' 
+            name='yelpDatum' 
+            onChange={this.changeHandler}
+            placeholder='Enter your zip code' />
+        </label>
+        <button className='add-event-button' type='submit'>Search</button>
+        </form>
           {this.props.yelpData.map(el => {
             return (
               <div data-solo={el.id} id="yelpinfo" key={el.id}>
@@ -267,6 +251,7 @@ export default class EditEvent extends Component {
                 <p>Address: {el.location.address1}</p>
                 <p>Phone: {el.display_phone}</p>
                 <button
+                  className='add-event-button'
                   data-name={el.name}
                   data-address={el.location.address1}
                   data-phone={el.display_phone}
@@ -286,79 +271,63 @@ export default class EditEvent extends Component {
     } else if (this.state.showBooks === true) {
       return (
         <div>
-          <NavBar />
-          <br />
-          <h1>Edit an Event!</h1>
+         <NavBar />
+         <br />
+        <h1>Edit an Event!</h1>
+        <div className='add-event-div'>
           <form onSubmit={this.editEvent}>
-            <label>
-              Event
-              <textarea
-                id="bookinput"
-                className="eventinfo"
-                type="text"
-                name="title"
-                onChange={this.changeHandler}
-                placeholder="Enter your event"
-              />
-            </label>
-            <br />
-            <label>
-              From
-              <input
-                type="text"
-                name="start"
-                onChange={this.changeHandler}
-                value={this.props.event.start}
-              />
-            </label>
-            <br />
-            <label>
-              To
-              <input
-                type="text"
-                name="end_time"
-                onChange={this.changeHandler}
-                value={this.props.event.end}
-              />
-            </label>
-            <br />
-            <button type="submit">Edit Event</button>
-            <input type="button" onClick={this.delete} value="Delete event" />
-          </form>
+          <p>Event</p>
+          <label>
+           <textarea 
+              id="bookinput"
+              className="eventinfo"
+              type="text"
+              name="title"
+              onChange={this.changeHandler}
+              placeholder="Enter your event" />
+          </label><br />
+          <p>From</p>
+          <label>
+            <input 
+              type='text' 
+              name='start' 
+              onChange={this.changeHandler}
+              value={this.props.event.start} />
+          </label><br />
+          <p>To</p>
+          <label>
+            <input 
+              type='text' 
+              name='end_time' 
+              onChange={this.changeHandler}
+              value={this.props.event.end} />
+          </label><br />
           <br />
-          <input
-            type="button"
-            onClick={this.showRestaurant}
-            value="Search for restaurants"
-          />
-          <input
-            type="button"
-            onClick={this.showBooks}
-            value="Search for books"
-          />
-          <input
-            type="button"
-            onClick={this.showTickets}
-            value="Search for activities"
-          />
-          <form onSubmit={this.submitBook}>
-            <label>
-              <input
-                type="text"
-                name="keyword"
-                onChange={this.changeHandler}
-                placeholder="Search for book"
-              />
-            </label>
-            <button type="submit">Search</button>
+          <button className='add-event-button' type='submit'>Edit Event</button>
+          <input className='add-event-button' type='button' onClick={this.delete} value='Delete event' />
           </form>
-          <div>
-            {this.props.book.map((el, index) => {
-              return (
-                <div id="bookinfo" key={index}>
+        </div>
+        <br />
+        <input className='add-event-button' type='button' onClick={this.showRestaurant} value='Search for restaurants' />
+        <input className='add-event-button' type='button' onClick={this.showBooks} value='Search for books' />
+        <input className='add-event-button' type='button' onClick={this.showTickets} value='Search for activities' />
+        <form onSubmit={this.submitBook}>
+        <label>
+          <input 
+            type='text' 
+            name='keyword' 
+            onChange={this.changeHandler}
+            placeholder='Search for book' />
+        </label>
+        <button className='add-event-button' type='submit'>Search</button>
+        </form>
+          <div>{this.props.book.map((el, index) => {
+            return (
+              <div id="bookinfo" key={index}>
                   <p>Book Title: {el.volumeInfo.title}</p>
                   <p>Author: {el.volumeInfo.authors}</p>
                   <button
+                    className='add-event-button'
                     data-title={el.volumeInfo.title}
                     data-author={el.volumeInfo.authors}
                     id="movedata"
@@ -378,60 +347,45 @@ export default class EditEvent extends Component {
     } else if (this.state.showTickets === true) {
       return (
         <div>
-          <NavBar />
+         <NavBar />
+         <br />
+        <h1>Edit an Event!</h1>
+        <div className='add-event-div'>
+        <form onSubmit={this.editEvent}>
+          <p>Event</p>
+          <label>
+            <textarea 
+              id="activityinput"
+              type="text"
+              name="title"
+              onChange={this.changeHandler}
+              placeholder="Enter your event"/>
+          </label><br />
+          <p>From</p>
+          <label>
+            <input 
+              id="ticketFrom"
+                  type="text"
+                  name="start"
+                  onChange={this.changeHandler}/>
+          </label><br />
+          <p>To</p>
+          <label>
+            <input 
+              id="ticketTo"
+                  type="text"
+                  name="end_time"
+                  onChange={this.changeHandler}/>
+          </label><br />
           <br />
-          <h1>Edit an Event!</h1>
-          <form onSubmit={this.editEvent}>
-            <label>
-              Event
-              <textarea
-                id="activityinput"
-                type="text"
-                name="title"
-                onChange={this.changeHandler}
-                placeholder="Enter your event"
-              />
-            </label>
-            <br />
-            <label>
-              From
-              <input
-                id="ticketFrom"
-                type="text"
-                name="start"
-                onChange={this.changeHandler}
-              />
-            </label>
-            <br />
-            <label>
-              To
-              <input
-                id="ticketTo"
-                type="text"
-                name="end_time"
-                onChange={this.changeHandler}
-              />
-            </label>
-            <br />
-            <button type="submit">Edit Event</button>
-            <input type="button" onClick={this.delete} value="Delete event" />
+          <button className='add-event-button' type='submit'>Edit Event</button>
+          <input className='add-event-button' type='button' onClick={this.delete} value='Delete event' />
           </form>
-          <br />
-          <input
-            type="button"
-            onClick={this.showRestaurant}
-            value="Search for restaurants"
-          />
-          <input
-            type="button"
-            onClick={this.showBooks}
-            value="Search for books"
-          />
-          <input
-            type="button"
-            onClick={this.showTickets}
-            value="Search for activities"
-          />
+        </div>
+        <br />
+          <input className='add-event-button' type='button' onClick={this.showRestaurant} value='Search for restaurants' />
+          <input className='add-event-button' type='button' onClick={this.showBooks} value='Search for books' />
+          <input className='add-event-button' type='button' onClick={this.showTickets} value='Search for activities' />
           <form onSubmit={this.submitTicket}>
             <label>
               <input
@@ -452,6 +406,7 @@ export default class EditEvent extends Component {
                   <h6>{el._embedded.venues[0].address.line1}</h6>
                   <h6>{el.dates.start.localDate}</h6>
                   <button
+                    className='add-event-button'
                     data-title={el.name}
                     data-name={el._embedded.venues[0].name}
                     data-address={el._embedded.venues[0].address.line1}
@@ -478,56 +433,42 @@ export default class EditEvent extends Component {
         <NavBar />
         <br />
         <h1>Edit an Event!</h1>
-        <form onSubmit={this.editEvent}>
+        <div className='add-event-div'>
+          <form onSubmit={this.editEvent}>
+          <p>Event</p>
           <label>
-            Event
-            <input
-              type="text"
-              name="title"
+            <input 
+              type='text' 
+              name='title' 
               onChange={this.changeHandler}
-              placeholder={this.state.title}
-            />
-          </label>
-          <br />
+              placeholder={this.state.title} />
+          </label><br />
+          <p>From</p>
           <label>
-            From
-            <input
-              type="text"
-              name="start"
+            <input 
+              type='text' 
+              name='start' 
               onChange={this.changeHandler}
-              value={this.props.event.start}
-            />
-          </label>
-          <br />
+              value={this.props.event.start} />
+          </label><br />
+          <p>To</p>
           <label>
-            To
-            <input
-              type="text"
-              name="end_time"
+            <input 
+              type='text' 
+              name='end_time' 
               onChange={this.changeHandler}
-              value={this.props.event.end}
-            />
-          </label>
+              value={this.props.event.end} />
+          </label><br />
           <br />
-          <button type="submit">Edit Event</button>
-          <input type="button" onClick={this.delete} value="Delete event" />
-        </form>
-        <input
-          type="button"
-          onClick={this.showRestaurant}
-          value="Search for restaurants"
-        />
-        <input
-          type="button"
-          onClick={this.showBooks}
-          value="Search for books"
-        />
-        <input
-          type="button"
-          onClick={this.showTickets}
-          value="Search for activities"
-        />
-        <footer className="footer-editevent">
+          <button className='add-event-button' type='submit'>Edit Event</button>
+          <input className='add-event-button' type='button' onClick={this.delete} value='Delete event' />
+          </form>
+        </div>
+        <br />
+        <input className='add-event-button' type='button' onClick={this.showRestaurant} value='Search for restaurants' />
+        <input className='add-event-button' type='button' onClick={this.showBooks} value='Search for books' />
+        <input className='add-event-button' type='button' onClick={this.showTickets} value='Search for activities' />
+        <footer className='footer-editevent'>
           <Footer />
         </footer>
       </div>
