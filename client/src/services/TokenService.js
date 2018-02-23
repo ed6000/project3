@@ -1,5 +1,6 @@
 export default {
   save(token) {
+    console.log('token saved, token: ', token);
     window.localStorage.setItem('authToken', token); // store token in localStorage under the 'authToken' key
   },
 

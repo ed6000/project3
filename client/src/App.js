@@ -80,7 +80,6 @@ class App extends Component {
       method: 'GET'
     })
       .then(resp => {
-        TokenService.save(resp.data.token);
         this.setState({ userData: resp.data });
         console.log('this.state.userData is ', this.state.userData);
       })
@@ -254,6 +253,7 @@ class App extends Component {
                       selectEvent={this.selectEvent}
                       dataLoaded={this.state.dataLoaded}
                       changeBackground={this.changeBackground.bind(this)}
+                      user={this.state.user}
                     />
                   );
                 }}

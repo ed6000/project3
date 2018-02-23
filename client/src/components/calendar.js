@@ -6,6 +6,8 @@ import moment from 'moment';
 import '../App.css';
 import NavBar from './NavBar';
 import Footer from './Footer';
+import TokenService from '../services/TokenService';
+import axios from 'axios';
 
 BigCalendar.momentLocalizer(moment);
 
@@ -13,11 +15,13 @@ export default class Calendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataLoaded: this.props.dataLoaded,
-      events: this.props.eventsData
+      id: this.props.user.id,
+      dataLoaded: false,
+      events: []
     };
     this.handleSelect = this.handleSelect.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.queryEvents = this.queryEvents.bind(this);
   }
 
   handleSelect(slotInfo) {
@@ -30,9 +34,24 @@ export default class Calendar extends Component {
     this.props.history.push('/editevent');
   }
 
+  queryEvents() {
+    console.log('in calendar.queryEvents, id is ', this.state.id);
+    this.setState({ dataLoaded: false });
+    axios({
+      url: `/events/${this.state.id}`,
+      method: 'get',
+      headers: {
+        Authorization: `Bearer ${TokenService.read()}`
+      }
+    }).then(response => {
+      this.setState({ events: response.data, dataLoaded: true });
+    });
+  }
+
   componentDidMount() {
     const colorData = 'stars_bg';
     this.props.changeBackground(colorData);
+    this.queryEvents();
     console.log('in componentDidMount calendar, colorData is ', colorData);
   }
 
