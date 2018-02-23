@@ -370,6 +370,7 @@ export default class AddEvent extends Component {
           <form onSubmit={this.submitTicket}>
         <label>
           <input 
+            className='add-event-button'
             type='text' 
             name='ticketDatum' 
             onChange={this.changeHandler}

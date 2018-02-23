@@ -389,13 +389,14 @@ export default class EditEvent extends Component {
           <form onSubmit={this.submitTicket}>
             <label>
               <input
+                className='add-event-button'
                 type="text"
                 name="ticketDatum"
                 onChange={this.changeHandler}
                 placeholder="Enter your city name"
               />
             </label>
-            <button type="submit">Search</button>
+            <button className='add-event-button' type="submit">Search</button>
           </form>
           <div>
             {this.props.ticketData.map(el => {
