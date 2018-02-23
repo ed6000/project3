@@ -50,10 +50,7 @@ export default class Calendar extends Component {
       <React.Fragment>
       <NavBar />
       <br />
-        <h3 className="callout">
-          Click an event to see more info, or drag the mouse over the calendar to
-          select a date/time range.
-        </h3>
+      <br />
         <div className='calendar-gridcontainer'>
         <div className='calendar-container'>
         <BigCalendar className='calendar'

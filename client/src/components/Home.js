@@ -55,7 +55,7 @@ export default class Home extends Component {
         <button className='homebtn' type="submit" value="Submit">Submit</button>
       </form>
         <br />
-        <h3>Don't have an account? <Link to='/newuser'> Register here! </Link> </h3>
+        <h3>Don't have an account? <Link className='register-link' to='/newuser'> Register here! </Link> </h3>
       <br />
       <footer>
         <Footer />

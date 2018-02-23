@@ -308,7 +308,6 @@ class App extends Component {
         </BrowserRouter>
       );
     }
-    // return <div>LOADING...</div>;
      return <div className="*"><img className='loading' src={'./images/animated_loading.png'} /></div>
   }
 }

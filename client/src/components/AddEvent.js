@@ -181,39 +181,42 @@ export default class AddEvent extends Component {
         <NavBar />
         <br />
         <h1>Add an Event!</h1>
+        <div className='add-event-div'>
         <form onSubmit={this.addEvent}>
-        <label>Event
-          <textarea
-            id="yelpinput"
-            className="eventinfo" 
-            type='text' 
-            name='title' 
-            onChange={this.changeHandler}
-            placeholder='Enter your event' />
-        </label><br />
-        <br />
-        <label id="from">From
-          <input 
-            type='text' 
-            name='start' 
-            onChange={this.changeHandler}
-            value={this.props.slot.start} />
-        </label><br />
-        <br />
-        <label>To
-          <input 
-            type='text' 
-            name='end_time' 
-            onChange={this.changeHandler}
-            value={this.props.slot.end} />
-        </label><br />
-        <br />
-        <button type='submit'>Add Event</button>
+        <p>Event</p>
+          <label>
+            <textarea
+              id="yelpinput"
+              className="eventinfo" 
+              type='text' 
+              name='title' 
+              onChange={this.changeHandler}
+              placeholder='Enter your event' />
+          </label><br />
+          <p>From</p>
+          <label id="from">
+            <input 
+              type='text' 
+              name='start' 
+              onChange={this.changeHandler}
+              value={this.props.slot.start} />
+          </label><br />
+          <p>To</p>
+          <label>
+            <input 
+              type='text' 
+              name='end_time' 
+              onChange={this.changeHandler}
+              value={this.props.slot.end} />
+          </label><br />
+          <br />
+          <button className='add-event-button' type='submit'>Add Event</button>
         </form>
+        </div>
         <br />
-        <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
-        <input type='button' onClick={this.showBooks} value='Search for books' />
-        <input type='button' onClick={this.showTickets} value='Search for activities' />
+        <input className='add-event-button' type='button' onClick={this.showRestaurant} value='Restaurants' />
+        <input className='add-event-button' type='button' onClick={this.showBooks} value='Books' />
+        <input className='add-event-button' type='button' onClick={this.showTickets} value='Activities' />
         <form onSubmit={this.submitYelp}>
         <label>
           <input 
@@ -222,7 +225,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             placeholder='Enter your zip code' />
         </label>
-        <button type='submit'>Search</button>
+        <button className='add-event-button' type='submit'>Search</button>
         </form>
           {this.props.yelpData.map(el => {
             return (
@@ -233,6 +236,7 @@ export default class AddEvent extends Component {
                 <p>Phone: {el.display_phone}</p>
                 </div>
                 <button
+                  className='add-event-button'
                   data-name={el.name}
                   data-address={el.location.address1}
                   data-phone={el.display_phone}
@@ -255,39 +259,42 @@ export default class AddEvent extends Component {
         <NavBar />
         <br />
         <h1>Add an Event!</h1>
-        <form onSubmit={this.addEvent}>
-        <label>Event
-          <textarea 
-            id="bookinput"
-                className="eventinfo"
-                type="text"
-                name="title"
-                onChange={this.changeHandler}
-                placeholder="Enter your event" />
-        </label><br />
+        <div className='add-event-div'>
+          <form onSubmit={this.addEvent}>
+          <p>Event</p>
+          <label>
+            <textarea 
+              id="bookinput"
+                  className="eventinfo"
+                  type="text"
+                  name="title"
+                  onChange={this.changeHandler}
+                  placeholder="Enter your event" />
+          </label><br />
+          <p>From</p>
+          <label>
+            <input 
+              type='text' 
+              name='start' 
+              onChange={this.changeHandler}
+              value={this.props.slot.start} />
+          </label><br />
+          <p>To</p>
+          <label>
+            <input 
+              type='text' 
+              name='end_time' 
+              onChange={this.changeHandler}
+              value={this.props.slot.end} />
+          </label><br />
+          <br />
+          <button className='add-event-button' type='submit'>Add Event</button>
+          </form>
+        </div>
         <br />
-        <label>From
-          <input 
-            type='text' 
-            name='start' 
-            onChange={this.changeHandler}
-            value={this.props.slot.start} />
-        </label><br />
-        <br />
-        <label>To
-          <input 
-            type='text' 
-            name='end_time' 
-            onChange={this.changeHandler}
-            value={this.props.slot.end} />
-        </label><br />
-        <br />
-        <button type='submit'>Add Event</button>
-        </form>
-        <br />
-        <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
-        <input type='button' onClick={this.showBooks} value='Search for books' />
-        <input type='button' onClick={this.showTickets} value='Search for activities' />
+        <input className='add-event-button' type='button' onClick={this.showRestaurant} value='Restaurants' />
+        <input className='add-event-button' type='button' onClick={this.showBooks} value='Books' />
+        <input className='add-event-button' type='button' onClick={this.showTickets} value='Activities' />
         <form onSubmit={this.submitBook}>
         <label>
           <input 
@@ -296,7 +303,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             placeholder='Search for book' />
         </label>
-        <button type='submit'>Search</button>
+        <button className='add-event-button' type='submit'>Search</button>
         </form>
           <div>{this.props.book.map((el, index) => {
             return (
@@ -304,6 +311,7 @@ export default class AddEvent extends Component {
                   <p>Book Title: {el.volumeInfo.title}</p>
                   <p>Author: {el.volumeInfo.authors}</p>
                   <button
+                    className='add-event-button'
                     data-title={el.volumeInfo.title}
                     data-author={el.volumeInfo.authors}
                     id="movedata"
@@ -325,8 +333,10 @@ export default class AddEvent extends Component {
         <NavBar />
         <br />
         <h1>Add an Event!</h1>
+        <div className='add-event-div'>
         <form onSubmit={this.addEvent}>
-        <label>Event
+        <p>Event</p>
+        <label>
           <textarea 
             id="activityinput"
                 type="text"
@@ -334,16 +344,16 @@ export default class AddEvent extends Component {
                 onChange={this.changeHandler}
                 placeholder="Enter your event"/>
         </label><br />
-        <br />
-        <label>From
+        <p>From</p>
+        <label>
           <input 
             id="ticketFrom"
                 type="text"
                 name="start"
                 onChange={this.changeHandler}/>
         </label><br />
-        <br />
-        <label>To
+        <p>To</p>
+        <label>
           <input 
             id="ticketTo"
                 type="text"
@@ -351,12 +361,13 @@ export default class AddEvent extends Component {
                 onChange={this.changeHandler}/>
         </label><br />
         <br />
-        <button type='submit'>Add Event</button>
+        <button className='add-event-button' type='submit'>Add Event</button>
         </form>
+        </div>
         <br />
-          <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
-          <input type='button' onClick={this.showBooks} value='Search for books' />
-          <input type='button' onClick={this.showTickets} value='Search for activities' />
+          <input className='add-event-button' type='button' onClick={this.showRestaurant} value='Restaurants' />
+          <input className='add-event-button' type='button' onClick={this.showBooks} value='Books' />
+          <input className='add-event-button' type='button' onClick={this.showTickets} value='Activities' />
           <form onSubmit={this.submitTicket}>
         <label>
           <input 
@@ -365,7 +376,7 @@ export default class AddEvent extends Component {
             onChange={this.changeHandler}
             placeholder='Enter your city name' />
         </label>
-        <button type='submit'>Search</button>
+        <button className='add-event-button' type='submit'>Search</button>
         </form>
         <div>{this.props.ticketData.map(el => {
           return (
@@ -375,6 +386,7 @@ export default class AddEvent extends Component {
                   <h6>{el._embedded.venues[0].address.line1}</h6>
                   <h6>{el.dates.start.localDate}</h6>
                   <button
+                    className='add-event-button'
                     data-title={el.name}
                     data-name={el._embedded.venues[0].name}
                     data-address={el._embedded.venues[0].address.line1}
@@ -399,24 +411,26 @@ export default class AddEvent extends Component {
         <NavBar />
         <br />
         <h1>Add an Event!</h1>
+        <div className='add-event-div'>
         <form onSubmit={this.addEvent}>
-        <label>Event
+        <p>Event</p>
+        <label>
           <input 
             type='text' 
             name='title' 
             onChange={this.changeHandler}
             placeholder='Enter your event' />
         </label><br />
-        <br />
-        <label>From
+        <p>From</p>
+        <label>
           <input 
             type='text' 
             name='start' 
             onChange={this.changeHandler}
             value={this.props.slot.start} />
         </label><br />
-        <br />
-        <label>To
+        <p>To</p>
+        <label>
           <input 
             type='text' 
             name='end_time' 
@@ -424,13 +438,15 @@ export default class AddEvent extends Component {
             value={this.props.slot.end} />
         </label><br />
         <br />
-        <button type='submit'>Add Event</button>
+        <button className='add-event-button' type='submit'>Add Event</button>
         <br />
         <br />
         </form>
-        <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
-        <input type='button' onClick={this.showBooks} value='Search for books' />
-        <input type='button' onClick={this.showTickets} value='Search for activities' />
+        </div>
+        <br />
+        <input className='add-event-button' type='button' onClick={this.showRestaurant} value='Restaurants' />
+        <input className='add-event-button' type='button' onClick={this.showBooks} value='Books' />
+        <input className='add-event-button' type='button' onClick={this.showTickets} value='Activities' />
          <footer className='footer-addevent'>
           <Footer />
         </footer>
