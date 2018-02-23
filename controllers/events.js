@@ -1,8 +1,6 @@
 const events = require('../models/events.js');
 const router = require('express').Router();
 
-
-
 router.get('/', events.allEvents, (req, res) => {
   res.json(res.locals.events);
 });

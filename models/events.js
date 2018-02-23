@@ -19,10 +19,7 @@ events.allEvents = (req, res, next) => {
 events.findById = (req, res, next) => {
   const id = req.params.id;
   db
-    .any(
-      'SELECT * FROM events WHERE user_id = ${id};',
-      { id: id }
-    )
+    .any('SELECT * FROM events WHERE user_id = ${id};', { id: id })
     .then(data => {
       res.locals.event = data;
       next();
@@ -55,44 +52,43 @@ events.addEvent = (req, res, next) => {
 events.addYelp = (req, res, next) => {
   zip = req.body.zip;
   axios({
-  method: "get",
-  url: `http://api.yelp.com/v3/businesses/search?term=food&location===${zip},usa&limit=5`,
-  headers:{
-    Authorization:
-      `Bearer ${process.env.YELP_KEY}`
-  }
-})
-  .then(response => {
-    res.locals.yelp = response.data.businesses;
-    next();
+    method: 'get',
+    url: `http://api.yelp.com/v3/businesses/search?term=food&location===${zip},usa&limit=5`,
+    headers: {
+      Authorization: `Bearer ${process.env.YELP_KEY}`
+    }
   })
-  .catch(error => {
-    console.log('error encountered in events.addYelp. error: ', error);
-    next(error);
-  });
+    .then(response => {
+      res.locals.yelp = response.data.businesses;
+      next();
+    })
+    .catch(error => {
+      console.log('error encountered in events.addYelp. error: ', error);
+      next(error);
+    });
 };
 
 events.addBook = (req, res, next) => {
   const keyword = req.body.keyword;
   axios({
-  method: "get",
-  url: `https://www.googleapis.com/books/v1/volumes?q=${keyword}`,
-})
-  .then(response => {
-    res.locals.books = response.data.items;
-    console.log('response: ', response.data.items);
-    next();
+    method: 'get',
+    url: `https://www.googleapis.com/books/v1/volumes?q=${keyword}`
   })
-  .catch(error => {
-    console.log('error encountered in events.addBook error: ', error);
-    next(error);
-  });
+    .then(response => {
+      res.locals.books = response.data.items;
+      console.log('response: ', response.data.items);
+      next();
+    })
+    .catch(error => {
+      console.log('error encountered in events.addBook error: ', error);
+      next(error);
+    });
 };
 
 events.addTicket = (req, res, next) => {
   city = req.body.city;
   axios({
-    method: "get",
+    method: 'get',
     url: `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${
       process.env.TICKET_KEY
     }&size=5&city=${city}`
@@ -102,11 +98,10 @@ events.addTicket = (req, res, next) => {
       next();
     })
     .catch(error => {
-      console.log("error encountered in events.addTicket, error: ", error);
+      console.log('error encountered in events.addTicket, error: ', error);
       next(error);
     });
 };
-
 
 events.editEvent = (req, res, next) => {
   db
@@ -128,10 +123,7 @@ events.editEvent = (req, res, next) => {
 
 events.deleteEvent = (req, res, next) => {
   db
-    .one(
-      'DELETE FROM events WHERE id = $1 RETURNING *',
-      [req.params.id]
-    )
+    .one('DELETE FROM events WHERE id = $1 RETURNING *', [req.params.id])
     .then(data => {
       res.locals.event = data;
       next();
@@ -143,6 +135,5 @@ events.deleteEvent = (req, res, next) => {
       );
     });
 };
-
 
 module.exports = events;

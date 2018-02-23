@@ -10,37 +10,38 @@ const user = {};
 user.create = function(req, res, next) {
   const userInfo = req.body;
   const passwordDigest = bcrypt.hashSync(userInfo.password, 10);
-  db.one(
-    'INSERT INTO users (profile_avatar, hobbies, username, password_digest) VALUES ($1, $2, $3, $4) RETURNING *;', [null, null, userInfo.username, passwordDigest, 0]
-  ).then(data => {
-    // remove the password_digest since it's sensitive
-    const { password_digest, ...userData } = data;
-    res.locals.user = userData;
-    const tokenData = {
-      username: userData.username,
-    };
+  db
+    .one(
+      'INSERT INTO users (profile_avatar, hobbies, username, password_digest) VALUES ($1, $2, $3, $4) RETURNING *;',
+      [null, null, userInfo.username, passwordDigest, 0]
+    )
+    .then(data => {
+      // remove the password_digest since it's sensitive
+      const { password_digest, ...userData } = data;
+      res.locals.user = userData;
+      const tokenData = {
+        username: userData.username
+      };
 
-    // pass some bit of data into makeToken
-    TokenService.makeToken(tokenData)
-      .then(token => {
-        console.log(token);
-        res.locals.token = token; // pass the token into res.locals
-        next() // calling next()
-      }).catch(next); // call next with error object
-
-  }).catch(err => {
-    console.log(`User Create failed: ${err}`)
-    next();
-  });
+      // pass some bit of data into makeToken
+      TokenService.makeToken(tokenData)
+        .then(token => {
+          console.log(token);
+          res.locals.token = token; // pass the token into res.locals
+          next(); // calling next()
+        })
+        .catch(next); // call next with error object
+    })
+    .catch(err => {
+      console.log(`User Create failed: ${err}`);
+      next();
+    });
 };
 
 user.findById = (req, res, next) => {
   const id = req.params.id;
   db
-    .one(
-      'SELECT * FROM users WHERE id = ${id};',
-      { id: id }
-    )
+    .one('SELECT * FROM users WHERE id = ${id};', { id: id })
     .then(data => {
       res.locals.user = data;
       next();
@@ -59,34 +60,39 @@ user.login = function(req, res, next) {
   const userInfo = req.body;
 
   // do the normal dance comparing password / password_digest
-  user.findByUsername(userInfo.username)
+  user
+    .findByUsername(userInfo.username)
     .then(userData => {
-      const isAuthed = bcrypt.compareSync(userInfo.password, userData.password_digest);
+      const isAuthed = bcrypt.compareSync(
+        userInfo.password,
+        userData.password_digest
+      );
 
       if (!isAuthed) {
-        next()
+        next();
       }
 
       // put userData into res.locals
       res.locals.user = userData;
 
       const data = {
-        username: userData.username,
+        username: userData.username
       };
 
       // and pass it into makeToken
       TokenService.makeToken(data)
         .then(token => {
           res.locals.token = token; // set the token on res.locals
-          next()
-        }).catch(err => {
+          next();
+        })
+        .catch(err => {
           next();
         });
-
-    }).catch(err => {
-      next();
     })
-}
+    .catch(err => {
+      next();
+    });
+};
 
 user.allUsers = (req, res, next) => {
   db
@@ -100,7 +106,6 @@ user.allUsers = (req, res, next) => {
       next(error);
     });
 };
-
 
 user.editUser = (req, res, next) => {
   db
@@ -122,10 +127,7 @@ user.editUser = (req, res, next) => {
 
 user.deleteUser = (req, res, next) => {
   db
-    .none(
-      'DELETE FROM users WHERE id = $1;',
-      [req.params.id]
-    )
+    .none('DELETE FROM users WHERE id = $1;', [req.params.id])
     .then(() => {
       console.log('user deleted');
       next();
@@ -137,6 +139,5 @@ user.deleteUser = (req, res, next) => {
       );
     });
 };
-
 
 module.exports = user;

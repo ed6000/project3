@@ -10,16 +10,16 @@ const router = require('express').Router();
 // });
 
 router.post('/', users.create, (req, res) => {
-  res.json({token: res.locals.token, user: res.locals.user})
+  res.json({ token: res.locals.token, user: res.locals.user });
 });
 
 router.post('/login', users.login, (req, res) => {
   if (!res.locals.user) {
-    res.status(401).json({err: 'Login Failed'})
+    res.status(401).json({ err: 'Login Failed' });
   } else {
     const { password_digest, ...user } = res.locals.user;
     console.log('res.locals.user', res.locals.user);
-    res.json({token: res.locals.token, user: res.locals.user});
+    res.json({ token: res.locals.token, user: res.locals.user });
   }
 });
 

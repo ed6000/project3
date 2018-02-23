@@ -14,16 +14,13 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
-
-
 app.use(cors());
 const tokenService = require('./services/TokenService');
 const authService = require('./services/AuthService');
 
-app.use(bodyParser.urlencoded({ extended: true  }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-
 
 app.use(cookieParser());
 

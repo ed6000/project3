@@ -18,10 +18,7 @@ invites.allInvites = (req, res, next) => {
 invites.findById = (req, res, next) => {
   const id = req.params.id;
   db
-    .one(
-      'SELECT * FROM invites WHERE id = ${id};',
-      { id: id }
-    )
+    .one('SELECT * FROM invites WHERE id = ${id};', { id: id })
     .then(data => {
       res.locals.invite = data;
       next();
@@ -36,7 +33,12 @@ invites.addInvite = (req, res, next) => {
   db
     .one(
       'INSERT INTO invites (user_id_creator, user_id_invitee, event_id_creator, event_id, confirmation) VALUES ($1, $2, $3, $4, null) RETURNING *;',
-      [req.body.user_id_creator, req.body.user_id_invitee, req.body.event_id_creator, req.body.event_id]
+      [
+        req.body.user_id_creator,
+        req.body.user_id_invitee,
+        req.body.event_id_creator,
+        req.body.event_id
+      ]
     )
     .then(data => {
       res.locals.invite = data;
@@ -50,13 +52,11 @@ invites.addInvite = (req, res, next) => {
     });
 };
 
-
 invites.accept = (req, res, next) => {
   db
-    .one(
-      'UPDATE invites SET confirmation = true WHERE id = $1 RETURNING *;',
-      [req.params.id]
-    )
+    .one('UPDATE invites SET confirmation = true WHERE id = $1 RETURNING *;', [
+      req.params.id
+    ])
     .then(data => {
       res.locals.invite = data;
       next();
@@ -71,10 +71,9 @@ invites.accept = (req, res, next) => {
 
 invites.decline = (req, res, next) => {
   db
-    .one(
-      'UPDATE invites SET confirmation = false WHERE id = $1 RETURNING *;',
-      [req.params.id]
-    )
+    .one('UPDATE invites SET confirmation = false WHERE id = $1 RETURNING *;', [
+      req.params.id
+    ])
     .then(data => {
       res.locals.invite = data;
       next();
@@ -89,10 +88,7 @@ invites.decline = (req, res, next) => {
 
 invites.deleteInvite = (req, res, next) => {
   db
-    .one(
-      'DELETE FROM invites WHERE id = $1',
-      [req.params.id]
-    )
+    .one('DELETE FROM invites WHERE id = $1', [req.params.id])
     .then(() => {
       console.log('invite deleted');
       next();
@@ -104,6 +100,5 @@ invites.deleteInvite = (req, res, next) => {
       );
     });
 };
-
 
 module.exports = invites;
