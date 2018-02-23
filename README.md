@@ -35,4 +35,5 @@ Then `cd` into `client` and run `npm install` as well to install the client-side
 ## Link to app and presentation
 
 [Live app](https://planit31.herokuapp.com/)
+
 [Presentation](https://docs.google.com/presentation/d/12tAr3i1vwK2tVCkn0qsFjsKtRaHxQGmMZAm5a0vL_GE/edit?usp=sharing)
