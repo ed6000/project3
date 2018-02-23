@@ -226,9 +226,11 @@ export default class AddEvent extends Component {
           {this.props.yelpData.map(el => {
             return (
               <div data-solo={el.id} id="yelpinfo" key={el.id}>
+                <div className="yelp-div">
                 <p>Name: {el.name}</p>
                 <p>Address: {el.location.address1}</p>
                 <p>Phone: {el.display_phone}</p>
+                </div>
                 <button
                   data-name={el.name}
                   data-address={el.location.address1}
@@ -241,6 +243,9 @@ export default class AddEvent extends Component {
               </div>
             );
           })}
+        <footer className='footer-addevent'>
+          <Footer />
+        </footer>
         </div>
       )
     } else if (this.state.showBooks === true) {
@@ -307,6 +312,9 @@ export default class AddEvent extends Component {
                 </div>
             );
           })}</div>
+        <footer className='footer-addevent'>
+          <Footer />
+        </footer>
         </div>
       )
     } else if (this.state.showTickets === true) {
@@ -378,6 +386,9 @@ export default class AddEvent extends Component {
                 </div>
           );
         })}</div>
+        <footer className='footer-addevent'>
+          <Footer />
+        </footer>
         </div>
       )
     }return (
@@ -416,10 +427,10 @@ export default class AddEvent extends Component {
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
         <input type='button' onClick={this.showTickets} value='Search for activities' />
-        <footer>
+         <footer className='footer-addevent'>
           <Footer />
         </footer>
         </div>
-        )
+    )
   }
 }

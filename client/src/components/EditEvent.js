@@ -256,6 +256,9 @@ export default class EditEvent extends Component {
               </div>
             );
           })}
+        <footer className='footer-editbusiness'>
+          <Footer />
+        </footer>
         </div>
       )
     } else if (this.state.showBooks === true) {
@@ -320,6 +323,9 @@ export default class EditEvent extends Component {
                 </div>
             );
           })}</div>
+        <footer className='footer-editbusiness'>
+          <Footer />
+        </footer>
         </div>
       )
     } else if (this.state.showTickets === true) {
@@ -389,6 +395,9 @@ export default class EditEvent extends Component {
                 </div>
           );
         })}</div>
+        <footer className='footer-editbusiness'>
+          <Footer />
+        </footer>
         </div>
       )
     }return (
@@ -423,7 +432,7 @@ export default class EditEvent extends Component {
         <input type='button' onClick={this.showRestaurant} value='Search for restaurants' />
         <input type='button' onClick={this.showBooks} value='Search for books' />
         <input type='button' onClick={this.showTickets} value='Search for activities' />
-        <footer>
+        <footer className='footer-editevent'>
           <Footer />
         </footer>
         </div>
