@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import EditProfile from "./EditProfile";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import React, { Component } from 'react';
+import EditProfile from './EditProfile';
+import NavBar from './NavBar';
+import Footer from './Footer';
 
 class Profile extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Profile extends Component {
     this.state = {
       editing: false
     };
-    
+
     this.editProfile = this.editProfile.bind(this);
   }
 
@@ -19,7 +19,7 @@ class Profile extends Component {
     this.props.changeBackground(colorData);
     console.log('in componentDidMount calendar, colorData is ', colorData);
   }
-    
+
   editProfile() {
     this.setState(prevState => {
       const nextState = { ...prevState, editing: !prevState.editing };
@@ -38,28 +38,33 @@ class Profile extends Component {
           editProfile={this.editProfile}
         />
       );
-    } return (
+    }
+    return (
       <div>
-      <NavBar />
-      <div className='grid-container'>
-      
-        <p className='profile-img'><img className='avatar' src={this.props.usersData.profile_avatar} /></p>
-        <h1 className='profile-welcome-form'><div className='welcome-msg'>Welcome to your profile {this.props.usersData.username}</div>
-          <button className='profile-button' onClick={this.editProfile}>
-            Edit Profile
-          </button>
-          {checkProfileEdit}
-        </h1>
-        <p className='profile-hobbies'>My hobbies: <br /> {this.props.usersData.hobbies}</p> 
-        
-      </div>
-      <footer className='footer-profile'>
-        <Footer />
-      </footer>
+        <NavBar />
+        <div className="grid-container">
+          <p className="profile-img">
+            <img className="avatar" src={this.props.usersData.profile_avatar} />
+          </p>
+          <h1 className="profile-welcome-form">
+            <div className="welcome-msg">
+              Welcome to your profile {this.props.usersData.username}
+            </div>
+            <button className="profile-button" onClick={this.editProfile}>
+              Edit Profile
+            </button>
+            {checkProfileEdit}
+          </h1>
+          <p className="profile-hobbies">
+            My hobbies: <br /> {this.props.usersData.hobbies}
+          </p>
+        </div>
+        <footer className="footer-profile">
+          <Footer />
+        </footer>
       </div>
     );
-  } 
+  }
 }
 
 export default Profile;
-
