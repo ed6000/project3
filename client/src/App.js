@@ -253,7 +253,6 @@ class App extends Component {
                     <Profile
                       {...props}
                       usersData={this.state.userData}
-                      logout={this.logout}
                       queryUser={this.queryUser}
                       changeBackground={this.changeBackground.bind(this)}
                     />

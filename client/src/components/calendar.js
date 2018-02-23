@@ -71,7 +71,6 @@ export default class Calendar extends Component {
             this.handleSelect(slotInfo)
           }
         />
-        <Link to='/profile'>go to profile</Link>
         </div>
         </div>
         <footer>

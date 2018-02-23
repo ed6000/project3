@@ -11,7 +11,6 @@ class Profile extends Component {
     };
     
     this.editProfile = this.editProfile.bind(this);
-    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -26,11 +25,6 @@ class Profile extends Component {
       const nextState = { ...prevState, editing: !prevState.editing };
       return nextState;
     });
-  }
-
-  logout() {
-    this.props.logout();
-    this.props.history.push('/');
   }
 
   render() {
@@ -59,7 +53,6 @@ class Profile extends Component {
         <p className='profile-hobbies'>My hobbies: <br /> {this.props.usersData.hobbies}</p> 
         
       </div>
-      <input className='profile-button' type='button' value='Logout' onClick={this.logout} />
       <footer className='footer-profile'>
         <Footer />
       </footer>
