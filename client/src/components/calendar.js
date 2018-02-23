@@ -74,6 +74,9 @@ export default class Calendar extends Component {
         <Link to='/profile'>go to profile</Link>
         </div>
         </div>
+        <footer>
+          <Footer />
+        </footer>
       </React.Fragment>
     );
     if (this.state.dataLoaded === true) {

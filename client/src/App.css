@@ -91,7 +91,6 @@ body {
 
 .login{
   max-width: 50vw;
- /* background: #D8D5D5;*/
   background-color: #CF512F;
   opacity: .7;
   margin: 0 auto;
@@ -157,4 +156,41 @@ a {
 .social-media-footer > img {
   max-width: 4vw;
   max-height: 4vw;
+}
+
+.footer-addevent {
+  padding-top: 35vh;
+}
+
+.footer-profile {
+  padding-top: 30vh;
+}
+
+.footer-editevent {
+  padding-top: 44vh;
+}
+
+.footer-editbusiness {
+  padding-top: 36vh;
+}
+
+#yelpinfo,
+#bookinfo,
+#ticketinfo {  
+  width: 30vw;
+  border: 1px solid;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#yelpinfo {
+  height: 30vh;
+}
+
+#bookinfo {
+  height: 25vh;
+}
+
+#ticketinfo {
+  height: 40vh;
 }

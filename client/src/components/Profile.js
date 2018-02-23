@@ -60,7 +60,7 @@ class Profile extends Component {
         
       </div>
       <input className='profile-button' type='button' value='Logout' onClick={this.logout} />
-      <footer>
+      <footer className='footer-profile'>
         <Footer />
       </footer>
       </div>
