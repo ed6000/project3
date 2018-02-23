@@ -136,6 +136,10 @@ a {
   word-spacing: 4vw;
   font-size: 2vw;
   font-family: 'Antic Didone', serif;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
 }
 
 .navbar > a {

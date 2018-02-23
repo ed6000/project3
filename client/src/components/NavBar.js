@@ -16,13 +16,16 @@ class NavBar extends Component {
 
   render() {
     return (
+      <p>
       <div>
       <nav className='navbar'>
+      
         <Link to='/calendar'>Calendar </Link>
         <Link to='/profile'>Profile </Link>
         <Link onClick={this.logout} to='/'>Logout</Link>
       </nav>
       </div>
+      </p>
     )
   }
 }

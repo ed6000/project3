@@ -179,6 +179,7 @@ export default class AddEvent extends Component {
       return  (
         <div>
         <NavBar />
+        <br />
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event
@@ -252,6 +253,7 @@ export default class AddEvent extends Component {
       return (
         <div>
         <NavBar />
+        <br />
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event
@@ -321,6 +323,7 @@ export default class AddEvent extends Component {
       return (
         <div>
         <NavBar />
+        <br />
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event
@@ -394,6 +397,7 @@ export default class AddEvent extends Component {
     }return (
         <div>
         <NavBar />
+        <br />
         <h1>Add an Event!</h1>
         <form onSubmit={this.addEvent}>
         <label>Event

@@ -49,6 +49,7 @@ export default class Calendar extends Component {
     const MyCalendar = props => (
       <React.Fragment>
       <NavBar />
+      <br />
         <h3 className="callout">
           Click an event to see more info, or drag the mouse over the calendar to
           select a date/time range.
