@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import axios from "axios";
-import NavBar from "./NavBar";
+import React, { Component } from 'react';
+import axios from 'axios';
+import NavBar from './NavBar';
 
 class EditProfile extends Component {
   constructor(props) {
@@ -9,7 +9,8 @@ class EditProfile extends Component {
     const usersData = this.props.usersData;
 
     this.state = {
-      profile_avatar: usersData.profile_avatar, hobbies: usersData.hobbies
+      profile_avatar: usersData.profile_avatar,
+      hobbies: usersData.hobbies
     };
 
     this.changeHandler = this.changeHandler.bind(this);
@@ -18,7 +19,7 @@ class EditProfile extends Component {
 
   changeHandler(e) {
     e.preventDefault();
-    this.setState({[e.target.name]: e.target.value});
+    this.setState({ [e.target.name]: e.target.value });
     console.log('in EditProfile, this.state is ', this.state);
   }
 
@@ -28,15 +29,18 @@ class EditProfile extends Component {
       profile_avatar: this.state.profile_avatar,
       hobbies: this.state.hobbies,
       username: this.props.usersData.username
-    }
-    console.log('in EditProfile, submitHandler, this.props.usersData is ', data);
+    };
+    console.log(
+      'in EditProfile, submitHandler, this.props.usersData is ',
+      data
+    );
     e.preventDefault();
     axios({
       url: `/users/${this.props.usersData.id}`,
-      method: "PUT",
+      method: 'PUT',
       data
     }).then(response => {
-      console.log("PUT successful, response.data:", response.data);
+      console.log('PUT successful, response.data:', response.data);
       this.props.queryUser(this.props.usersData.id);
       this.props.editProfile();
     });
@@ -44,14 +48,14 @@ class EditProfile extends Component {
 
   render() {
     return (
-      <div className='edit-profile-form'>
+      <div className="edit-profile-form">
         <form onSubmit={this.submitHandler}>
-        <br />
-          <label>{"Enter image address for your profile avatar here:"}</label>
+          <br />
+          <label>{'Enter image address for your profile avatar here:'}</label>
           <br />
           <br />
           <input
-            className='profile-input'
+            className="profile-input"
             type="text"
             name="profile_avatar"
             onChange={this.changeHandler}
@@ -59,18 +63,18 @@ class EditProfile extends Component {
           />
           <br />
           <br />
-          <label>{"Have any hobbies? Let the world know!"}</label>
+          <label>{'Have any hobbies? Let the world know!'}</label>
           <br />
           <br />
           <textarea
-            className='edit-profile-text-area'
+            className="edit-profile-text-area"
             type="text"
             name="hobbies"
             onChange={this.changeHandler}
             value={this.state.hobbies}
           />
           <br />
-          <input className='edit-button-submit' type="submit" value="submit" />
+          <input className="edit-button-submit" type="submit" value="submit" />
         </form>
       </div>
     );

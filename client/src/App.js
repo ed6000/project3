@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import axios from "axios";
-import NewUser from "./components/NewUser";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-import AddEvent from "./components/AddEvent";
-import EditEvent from "./components/EditEvent";
-import Calendar from "./components/calendar.js";
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+import NewUser from './components/NewUser';
+import Home from './components/Home';
+import Profile from './components/Profile';
+import AddEvent from './components/AddEvent';
+import EditEvent from './components/EditEvent';
+import Calendar from './components/calendar.js';
 import TokenService from './services/TokenService';
-import "./App.css";
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class App extends Component {
       yelpData: [],
       ticketData: [],
       zip: 10001,
-      city: "Los Angeles",
+      city: 'Los Angeles',
       events: [],
       dataLoaded: false,
       book: [],
@@ -25,7 +25,7 @@ class App extends Component {
       event: {},
       user: {},
       userData: {},
-      background: '', 
+      background: ''
     };
 
     console.log(this.state);
@@ -49,39 +49,42 @@ class App extends Component {
 
   register(data) {
     axios('/users/', {
-      method: "POST",
+      method: 'POST',
       data
-    }).then(resp => {
-      TokenService.save(resp.data.token)
     })
-    .catch(err => console.log(`err: ${err}`));
+      .then(resp => {
+        TokenService.save(resp.data.token);
+      })
+      .catch(err => console.log(`err: ${err}`));
   }
 
   login(data) {
     console.log('login data', data);
     axios('/users/login', {
-      method: "POST",
+      method: 'POST',
       data
-    }).then(resp => {
-      TokenService.save(resp.data.token);
-      this.setState({ user: resp.data.user})
-      console.log('this.state.user is ', this.state.user)
-      this.queryEvents();
-      this.queryUser(resp.data.user.id);
     })
-    .catch(err => console.log(`err: ${err}`));
+      .then(resp => {
+        TokenService.save(resp.data.token);
+        this.setState({ user: resp.data.user });
+        console.log('this.state.user is ', this.state.user);
+        this.queryEvents();
+        this.queryUser(resp.data.user.id);
+      })
+      .catch(err => console.log(`err: ${err}`));
   }
 
   queryUser(id) {
     console.log('in queryUser, this.state.user.id is ', this.state.user.id);
     axios(`/users/${id}`, {
-      method: "GET"
-    }).then(resp => {
-      TokenService.save(resp.data.token);
-      this.setState({ userData: resp.data})
-      console.log('this.state.userData is ', this.state.userData)
+      method: 'GET'
     })
-    .catch(err => console.log(`err: ${err}`));
+      .then(resp => {
+        TokenService.save(resp.data.token);
+        this.setState({ userData: resp.data });
+        console.log('this.state.userData is ', this.state.userData);
+      })
+      .catch(err => console.log(`err: ${err}`));
   }
 
   logout() {
@@ -91,9 +94,13 @@ class App extends Component {
   changeBackground(colorData) {
     console.log('changeBackground invoked, colorData', colorData);
     if (this.state.background !== colorData) {
-    this.setState({ 'background': colorData, 'changed': true });
-  }
-    console.log('in changeBackground, color is ', this.state.background, this.state.changed);
+      this.setState({ background: colorData, changed: true });
+    }
+    console.log(
+      'in changeBackground, color is ',
+      this.state.background,
+      this.state.changed
+    );
   }
 
   toggleData() {
@@ -112,10 +119,10 @@ class App extends Component {
     this.setState({ dataLoaded: false });
     axios({
       url: `/events/${this.state.user.id}`,
-      method: "get",
+      method: 'get',
       headers: {
-        Authorization: `Bearer ${TokenService.read()}`,
-      },
+        Authorization: `Bearer ${TokenService.read()}`
+      }
     }).then(response => {
       this.setState({ events: response.data, dataLoaded: true });
     });
@@ -123,8 +130,8 @@ class App extends Component {
 
   queryYelp(data) {
     axios({
-      url: "/events/addYelp",
-      method: "post",
+      url: '/events/addYelp',
+      method: 'post',
       data: {
         zip: data.zip
       }
@@ -135,18 +142,18 @@ class App extends Component {
 
   queryBooks(data) {
     axios({
-    url: "/events/addBook",
-    method: "post", 
-    data
-  }).then(response => {
+      url: '/events/addBook',
+      method: 'post',
+      data
+    }).then(response => {
       this.setState({ book: response.data });
     });
   }
 
   queryTicket(data) {
     axios({
-      url: "/events/addTicket",
-      method: "post",
+      url: '/events/addTicket',
+      method: 'post',
       data: {
         city: data.city
       }
@@ -164,12 +171,12 @@ class App extends Component {
     data.id = this.state.user.id;
     console.log('in addEvent, data is ', data);
     axios({
-      url: "/events",
-      method: "post",
+      url: '/events',
+      method: 'post',
       data,
       headers: {
-        Authorization: `Bearer ${TokenService.read()}`,
-      },
+        Authorization: `Bearer ${TokenService.read()}`
+      }
     }).then(response => {
       this.setState(prevState => {
         prevState.events = prevState.events.concat(response.data);
@@ -187,13 +194,13 @@ class App extends Component {
     this.setState({ dataLoaded: false });
     axios({
       url: `/events/${data.id}`,
-      method: "put",
+      method: 'put',
       data,
       headers: {
-        Authorization: `Bearer ${TokenService.read()}`,
-      },
+        Authorization: `Bearer ${TokenService.read()}`
+      }
     }).then(response => {
-        this.queryEvents();
+      this.queryEvents();
     });
   }
 
@@ -201,10 +208,10 @@ class App extends Component {
     this.setState({ dataLoaded: false });
     axios({
       url: `/events/${data.id}`,
-      method: "delete",
+      method: 'delete',
       headers: {
-        Authorization: `Bearer ${TokenService.read()}`,
-      },
+        Authorization: `Bearer ${TokenService.read()}`
+      }
     }).then(response => {
       this.setState(prevState => {
         prevState.events = prevState.events.concat(response.data);
@@ -218,16 +225,22 @@ class App extends Component {
     if (this.state.dataLoaded === true) {
       return (
         <BrowserRouter>
-          <div className={"App " + this.state.background}>
+          <div className={'App ' + this.state.background}>
             <Switch>
-              <Route exact path="/" render={props => {
-                return (<Home {...props} submit={this.login} />)
+              <Route
+                exact
+                path="/"
+                render={props => {
+                  return <Home {...props} submit={this.login} />;
                 }}
-                />
-              <Route exact path="/newuser" render={props => {
-                return (<NewUser {...props} submit={this.register} />)
-              }}
-                />
+              />
+              <Route
+                exact
+                path="/newuser"
+                render={props => {
+                  return <NewUser {...props} submit={this.register} />;
+                }}
+              />
               <Route
                 exact
                 path="/calendar"
@@ -276,7 +289,6 @@ class App extends Component {
                       book={this.state.book}
                       queryTicket={this.queryTicket}
                       ticketData={this.state.ticketData}
-
                     />
                   );
                 }}
@@ -309,7 +321,11 @@ class App extends Component {
       );
     }
     // return <div>LOADING...</div>;
-     return <div className="*"><img className='loading' src={'./images/animated_loading.png'} /></div>
+    return (
+      <div className="*">
+        <img className="loading" src={'./images/animated_loading.png'} />
+      </div>
+    );
   }
 }
 
