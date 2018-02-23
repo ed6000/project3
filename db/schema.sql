@@ -1,4 +1,4 @@
-\c planit_db
+-- \c planit_db
 
 DROP TABLE IF EXISTS users CASCADE;
 

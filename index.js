@@ -8,12 +8,12 @@ const app = express();
 const port = process.env.PORT || 8080;
 const dotenv = require('dotenv').config();
 const cors = require('cors');
+const path = require('path');
 
 app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/public'));
-
+app.use(express.static(__dirname + '/public/build'));
 
 
 app.use(cors());
@@ -38,6 +38,10 @@ const invitesRouter = require('./controllers/invites.js');
 app.use('/users', usersRouter);
 app.use('/events', eventsRouter);
 app.use('/invites', invitesRouter);
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/public/build/index.html'));
+});
 
 app.use((err, req, res, next) => {
   console.log('Error encountered:', err);

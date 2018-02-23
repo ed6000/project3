@@ -1,4 +1,4 @@
-\c planit_db
+-- \c planit_db
 
 INSERT INTO users (username, password_digest, profile_avatar, hobbies)
 VALUES
