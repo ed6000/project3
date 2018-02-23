@@ -14,7 +14,8 @@ PlanIt is a new innovative technology which brings peak efficiency making time c
 * As a user, when I send another user an event suggestion, I want to know whether they accepted my invitation.
 
 ## Features
-In progress
+In PlanIT, you can create and login to your own account. You can also edit your own profile with your own avatar and hobbies. You also have your own personalized calendar, where you can select a range of time for a task. There is also a built in ability to search for restaurants, books, and activities to add to your
+calendar.
 
 ## Installation Instructions
 Run `npm install` in the root directory to install all server-side dependencies. Then run `psql -f db/schema.sql` to start the database. You must have PostgreSQL already installed. Afterwards, run `node index.js` to start the server.
@@ -22,10 +23,6 @@ Run `npm install` in the root directory to install all server-side dependencies.
 Then `cd` into `client` and run `npm install` as well to install the client-side dependencies. Afterwards, run
 `npm run start` to fully start the app!
 
-## Pain Points
-![Pain Points](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4X74rtuhnFsCgOy2x_s8ze0I3F-VPh_VFTyJwjBt5asq65i7Z)
-
-In progress
 
 ## Link to app and presentation
 
